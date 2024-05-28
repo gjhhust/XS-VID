@@ -1,3 +1,8 @@
-theme: jekyll-theme-cayman
+remote_theme: pages-themes/cayman@v0.2.0
+plugins:
+- jekyll-remote-theme # add this line to the plugins list if you already have one
 title: XS-VID
 description: An Extra Small Object Video Detection Dataset, Big Challenges.
+github:
+  url_baidu: http://aliyundrive.example.com/XS-VID
+  url_baidu: https://pan.baidu.com/s/1HQj__rwsqjkCDMheZH2XnA?pwd=6yvv
