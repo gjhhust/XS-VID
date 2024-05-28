@@ -1,19 +1,33 @@
 # XS-VID: An Extra Small Object Video Detection Dataset
+XS-VID is a comprehensive dataset for Extra Small Object Video Detection, including diverse day and night scenes such as rivers, forests, skyscrapers, and streets.
+![area](imgs/XS-VID_challenge.png)
 
-Welcome to the XS-VID dataset repository. This dataset is designed for the detection of extra small objects in video sequences.
+## Update
+- [20240610] Our paper of XS-VID dataset is submitted to arXiv.
+- [20240601] The quantitative results of several mainstream methods on XS-VID test-set are reported!
+- [20240530] We add the visualization of images in XS-VID.
+- [20240528] Our Homepage for XS-VID benchmark opens!
 
-## About the Dataset
 
-XS-VID includes a diverse array of day and night scenes such as rivers, forests, skyscrapers, and streets, featuring multiple categories and sizes of targets. It achieves unprecedented breadth and depth in covering and quantifying minuscule targets (< 32^2 pixels).
+## XS-VID
+XS-VID contains a diverse array of scenes featuring multiple categories and sizes of targets. Notably, XS-VID achieves unprecedented breadth and depth in covering and quantifying minuscule targets (< $32^2$ pixels). Some example images are shown below.
+![image](imgs/vis.png)
+
+## Results
+We exhibit the quantitative experiment results of several representative methods on the XS-VID test-set as follows.
+
+XS-VID image
 
 ## Download
+We provide the downloading of our paper and datasets.
 
-You can download the dataset from the [data folder](data/xs-vid-dataset.zip).
+- Paper: Towards Effective Detection of Extra Small Objects in Videos: A New Dataset and Benchmarks
+- Datasets: XS-VID: [aliyun](https://github.com/gjhhust/YOLOFT); [BaiduNetDisk](#)
 
-## Sample Images
+## Codes
+The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
 
-Sample images can be found in the [images folder](images/vis.png).
+- XS-VID Benchmark: [XS-VID-YOLOFT](https://github.com/gjhhust/YOLOFT)
 
-## Contact
-
-For any questions or inquiries, please contact [your email address].
+## Support or Contact
+If you have any problems about our XS-VID benchmark, please feel free to contact us at gjh_hust@hust.edu.cn.
