@@ -38,7 +38,7 @@ The official codes of our benchmark, which mainly includes data preparation and 
 - VOD Method: [MMtracking](https://github.com/open-mmlab/mmtracking); [DiffusionVID](https://github.com/sdroh1027/DiffusionVID); 
 - GOD Method: [MMdetection](https://github.com/open-mmlab/mmdetection)
 - SOD Method: [CFINet](https://github.com/shaunyuan22/CFINet); [CEASC](https://github.com/Cuogeihong/CEASC)
-- YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)
+- YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)；[StreamYOLO](https://github.com/yancie-yjr/StreamYOLO)
 - Eval Tools: (later)
 
 ## Support or Contact
