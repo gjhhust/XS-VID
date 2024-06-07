@@ -3,6 +3,7 @@ XS-VID is a comprehensive dataset for Extra Small Object Video Detection, includ
 ![area](imgs/XS-VID_challenge.png)
 
 ## Update
+
 - [20240530] The quantitative results of several mainstream methods on XS-VID test-set are reported!
 - [20240530] We add the visualization of images in XS-VID.
 - [20240528] Our [Homepage](https://gjhhust.github.io/XS-VID/) for XS-VID benchmark opens!
@@ -27,12 +28,13 @@ We exhibit the quantitative experiment results of several representative methods
 ## Download
 We provide the downloading of our datasets.
 
-- Datasets: XS-VID: [aliyun](later open);  [BaiduNetDisk](https://pan.baidu.com/s/1HQj__rwsqjkCDMheZH2XnA?pwd=6yvv)
+- [google drive] (Uploading later);  
+- [BaiduNetDisk](https://pan.baidu.com/s/1VXle03mUYpKtmp3xj6C4dA?pwd=yp5g)
 
 ## Codes
 The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
 
-- XS-VID Benchmark: [XS-VID: YOLOFT](https://github.com/gjhhust/YOLOFT)
+- XS-VID baseline: [our XS-VID baseline: YOLOFT](https://github.com/gjhhust/YOLOFT)
 - VOD Method: [MMtracking](https://github.com/open-mmlab/mmtracking); [DiffusionVID](https://github.com/sdroh1027/DiffusionVID); 
 - GOD Method: [MMdetection](https://github.com/open-mmlab/mmdetection)
 - SOD Method: [CFINet](https://github.com/shaunyuan22/CFINet); [CEASC](https://github.com/Cuogeihong/CEASC)
