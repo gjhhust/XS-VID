@@ -28,8 +28,14 @@ We exhibit the quantitative experiment results of several representative methods
 ## Download
 We provide the downloading of our datasets.
 
-- [Google drive]： [annotations](https://drive.google.com/file/d/1-MF_H6OnLL-6ZAHwmwTOdxIeKY9zqGO9/view?usp=sharing); [images]() (Uploading later);  
+- [Google drive]： [annotations](https://drive.google.com/file/d/1-MF_H6OnLL-6ZAHwmwTOdxIeKY9zqGO9/view?usp=sharing); [images(0-3)](https://drive.google.com/drive/folders/1EGTIWLCLUAlKfbq7KEeHqXL8PAyKHNQ_?usp=sharing); [images(4-5)](https://drive.google.com/drive/folders/1m7YL3XVDjmiiVEy_rY4gVr0tJxnn8e0Y?usp=sharing);
 - [BaiduNetDisk]：[annotations and images]((https://pan.baidu.com/s/1VXle03mUYpKtmp3xj6C4dA?pwd=yp5g));
+
+Please choose a download method to download the annotations and all images. Make sure all the split archive files (e.g., `images.zip`, `images.z01`, `images.z02`, etc.) are in the same directory. Use the following command to extract them:
+```bash
+unzip images.zip
+unzip annotations.zip
+```
 
 ## Codes
 The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
