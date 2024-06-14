@@ -40,12 +40,12 @@ unzip annotations.zip
 ## Codes
 The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
 
-- XS-VID baseline: [our XS-VID baseline: YOLOFT](https://github.com/gjhhust/YOLOFT)
+- **our XS-VID baseline:** [YOLOFT](https://github.com/gjhhust/YOLOFT)
 - VOD Method: [MMtracking](https://github.com/open-mmlab/mmtracking); [DiffusionVID](https://github.com/sdroh1027/DiffusionVID); 
 - GOD Method: [MMdetection](https://github.com/open-mmlab/mmdetection)
 - SOD Method: [CFINet](https://github.com/shaunyuan22/CFINet); [CEASC](https://github.com/Cuogeihong/CEASC)
 - YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)；[StreamYOLO](https://github.com/yancie-yjr/StreamYOLO)
-- Eval Tools: (later)
+- Eval Tools:  [Eval code](https://github.com/gjhhust/XS-VID)
 
 ## Support or Contact
 If you have any problems about our XS-VID benchmark, please feel free to contact us at gjh_hust@hust.edu.cn.
