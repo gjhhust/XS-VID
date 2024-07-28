@@ -36,6 +36,7 @@ Please choose a download method to download the annotations and all images. Make
 unzip images.zip
 unzip annotations.zip
 ```
+If you get an error while unpacking, you can get help from [issues](https://github.com/gjhhust/XS-VID/issues)
 
 ## Codes
 The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
