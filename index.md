@@ -4,6 +4,7 @@ XS-VID is a comprehensive dataset for Extra Small Object Video Detection, includ
 
 ## Update
 
+- [20240811] Annotation in YOLO format released!
 - [20240530] The quantitative results of several mainstream methods on XS-VID test-set are reported!
 - [20240530] We add the visualization of images in XS-VID.
 - [20240528] Our [Homepage](https://gjhhust.github.io/XS-VID/) for XS-VID benchmark opens!
@@ -29,7 +30,7 @@ We exhibit the quantitative experiment results of several representative methods
 We provide the downloading of our datasets.
 
 - [Google drive]： [annotations](https://drive.google.com/file/d/1-MF_H6OnLL-6ZAHwmwTOdxIeKY9zqGO9/view?usp=sharing); [images(0-3)](https://drive.google.com/drive/folders/1EGTIWLCLUAlKfbq7KEeHqXL8PAyKHNQ_?usp=sharing); [images(4-5)](https://drive.google.com/drive/folders/1a6E-7YI-rwSDOtjqzRf_E0leYXSNtjaW?usp=sharing);
-- [BaiduNetDisk]：[annotations and images](https://pan.baidu.com/s/1VXle03mUYpKtmp3xj6C4dA?pwd=yp5g);
+- [BaiduNetDisk]：[annotations and images](https://pan.baidu.com/s/1MHPF2ajDvq2y4_nTYQG3yA?pwd=tzdx);
 
 Please choose a download method to download the annotations and all images. Make sure all the split archive files (e.g., `images.zip`, `images.z01`, `images.z02`, etc.) are in the same directory. Use the following command to extract them:
 ```bash
