@@ -5,11 +5,11 @@ XS-VID is a comprehensive dataset for Extra Small Object Video Detection, includ
 ## Update
 
 - [20241124] We will soon be releasing XS-VIDv2, incorporating many new videos and scenarios!
-- [20241011] our paper released on https://arxiv.org/abs/2407.18137
+- [20241011] our paper released on **https://arxiv.org/abs/2407.18137**
 - [20240811] Annotation in YOLO format released!
 - [20240530] The quantitative results of several mainstream methods on XS-VID test-set are reported!
 - [20240530] We add the visualization of images in XS-VID.
-- [20240528] Our [Homepage](https://gjhhust.github.io/XS-VID/) for XS-VID benchmark opens!
+- [20240528] Our **[Homepage](https://gjhhust.github.io/XS-VID/)** for XS-VID benchmark opens!
 
 
 ## XS-VID
