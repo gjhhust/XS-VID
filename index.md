@@ -51,5 +51,17 @@ The official codes of our benchmark, which mainly includes data preparation and 
 - YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)；[StreamYOLO](https://github.com/yancie-yjr/StreamYOLO)
 - Eval Tools:  [Eval code](https://github.com/gjhhust/XS-VID)
 
+## Citation
+
+If you find MovieChat useful for your your research and applications, please cite using this BibTeX:
+```
+@article{guo2024XSVID,
+  title={XS-VID: An Extremely Small Video Object Detection Dataset},
+  author={Jiahao Guo, Ziyang Xu, Lianjun Wu, Fei Gao, Wenyu Liu, Xinggang Wang},
+  journal={arXiv preprint arXiv:2407.18137},
+  year={2024}
+}
+```
+
 ## Support or Contact
 If you have any problems about our XS-VID benchmark, please feel free to contact us at gjh_hust@hust.edu.cn.
