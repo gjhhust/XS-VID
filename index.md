@@ -33,7 +33,31 @@ We exhibit the quantitative experiment results of several representative methods
 ## Download
 We provide the downloading of our datasets. 
 
-### Download and Extract Dataset
+#### Download and Dataset by huggingface
+
+**Linux Command:**
+
+```bash
+pip install huggingface_hub && \
+huggingface-cli download lanlanlan23/XS-VID --repo-type dataset --local-dir ./XS-VID && \
+mkdir -p ./XS-VID/{annotations,images} && \
+unzip -o ./XS-VID/annotations.zip -d ./XS-VID/annotations && \
+find ./XS-VID -name 'videos_subset_*.zip' -exec unzip -o {} -d ./XS-VID/images \; && \
+rm -f ./XS-VID/*.zip
+```
+
+**Windows Command (CMD):**
+
+```bash
+pip install huggingface_hub && ^
+huggingface-cli download lanlanlan23/XS-VID --repo-type dataset --local-dir ./XS-VID && ^
+mkdir "./XS-VID\annotations" && mkdir "./XS-VID\images" && ^
+powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -DestinationPath './XS-VID/annotations' -Force" && ^
+for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
+del /f /q "./XS-VID\*.zip"
+```
+
+### Download and Dataset by modelscope(Recommended for China)
 
 **Linux Command:**
 
@@ -45,7 +69,6 @@ unzip -o ./XS-VID/annotations.zip -d ./XS-VID/annotations && \
 find ./XS-VID -name 'videos_subset_*.zip' -exec unzip -o {} -d ./XS-VID/images \; && \
 rm -f ./XS-VID/*.zip
 ```
-
 **Windows Command (CMD):**
 
 ```bash
@@ -56,6 +79,7 @@ powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -Destinatio
 for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
 del /f /q "./XS-VID\*.zip"
 ```
+
 ### Expected Folder Structure
 ```
 ./XS-VID/
