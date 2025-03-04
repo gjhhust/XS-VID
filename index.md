@@ -30,11 +30,21 @@ We exhibit the quantitative experiment results of several representative methods
 
 ![results](imgs/all_result.png)
 
+## Codes
+The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
+
+- **our XS-VID baseline:** [YOLOFT](https://github.com/gjhhust/YOLOFT)
+- VOD Method: [MMtracking](https://github.com/open-mmlab/mmtracking); [DiffusionVID](https://github.com/sdroh1027/DiffusionVID); 
+- GOD Method: [MMdetection](https://github.com/open-mmlab/mmdetection)
+- SOD Method: [CFINet](https://github.com/shaunyuan22/CFINet); [CEASC](https://github.com/Cuogeihong/CEASC)
+- YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)；[StreamYOLO](https://github.com/yancie-yjr/StreamYOLO)
+- Eval Tools:  [Eval code](https://github.com/gjhhust/XS-VID)
+
+
 ## Download
 We provide the downloading of our datasets. 
 
-<details>
-<summary>Download method1: huggingface</summary>
+### Download method1: huggingface
   
 **Linux Command:**
 
@@ -57,10 +67,9 @@ powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -Destinatio
 for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
 del /f /q "./XS-VID\*.zip"
 ```
-</details> 
 
-<details>
-<summary>Download method2: modelscope(Recommended for China)</summary>
+
+### Download method2: modelscope(Recommended for China)
   
 **Linux Command:**
 
@@ -82,7 +91,6 @@ powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -Destinatio
 for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
 del /f /q "./XS-VID\*.zip"
 ```
-</details> 
 
 ### Expected Folder Structure
 ```
@@ -96,16 +104,6 @@ del /f /q "./XS-VID\*.zip"
 - Ensure sufficient disk space (~same as ZIP sizes + extracted content).
 
 If you get an error while unpacking, you can get help from [issues](https://github.com/gjhhust/XS-VID/issues)
-
-## Codes
-The official codes of our benchmark, which mainly includes data preparation and evaluation, are released below.
-
-- **our XS-VID baseline:** [YOLOFT](https://github.com/gjhhust/YOLOFT)
-- VOD Method: [MMtracking](https://github.com/open-mmlab/mmtracking); [DiffusionVID](https://github.com/sdroh1027/DiffusionVID); 
-- GOD Method: [MMdetection](https://github.com/open-mmlab/mmdetection)
-- SOD Method: [CFINet](https://github.com/shaunyuan22/CFINet); [CEASC](https://github.com/Cuogeihong/CEASC)
-- YOLO Method: [Ultralytics](https://github.com/ultralytics/ultralytics)；[StreamYOLO](https://github.com/yancie-yjr/StreamYOLO)
-- Eval Tools:  [Eval code](https://github.com/gjhhust/XS-VID)
 
 ## Citation
 
