@@ -42,7 +42,7 @@ The official codes of our benchmark, which mainly includes data preparation and 
 
 
 ## Download
-We provide the downloading of our datasets. 
+We provide the downloading of our datasets, You can download the full XS-VID dataset by choosing any of the following four choices.
 
 ### Download method1: huggingface
   
