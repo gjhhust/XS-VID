@@ -33,8 +33,9 @@ We exhibit the quantitative experiment results of several representative methods
 ## Download
 We provide the downloading of our datasets. 
 
-#### Download and Dataset by huggingface
-
+<details>
+<summary>Download method1: huggingface</summary>
+  
 **Linux Command:**
 
 ```bash
@@ -56,9 +57,11 @@ powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -Destinatio
 for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
 del /f /q "./XS-VID\*.zip"
 ```
+</details> 
 
-### Download and Dataset by modelscope(Recommended for China)
-
+<details>
+<summary>Download method2: modelscope(Recommended for China)</summary>
+  
 **Linux Command:**
 
 ```bash
@@ -79,6 +82,7 @@ powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -Destinatio
 for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
 del /f /q "./XS-VID\*.zip"
 ```
+</details> 
 
 ### Expected Folder Structure
 ```
