@@ -4,6 +4,8 @@ XS-VID is a comprehensive dataset for Extra Small Object Video Detection, includ
 
 ## Update
 
+- [20250303] We have provided a new download of XS-VIDv2 with the v1 data merged to form a new dataset, with a convenient command line download below!
+- [20250301] We have released XS-VIDv2 containing 374 videos with 186446 frames for training 36478 frames for testing!
 - [20241124] We will soon be releasing XS-VIDv2, incorporating many new videos and scenarios!
 - [20241011] our paper released on **https://arxiv.org/abs/2407.18137**
 - [20240811] Annotation in YOLO format released!
@@ -29,16 +31,42 @@ We exhibit the quantitative experiment results of several representative methods
 ![results](imgs/all_result.png)
 
 ## Download
-We provide the downloading of our datasets.
+We provide the downloading of our datasets. 
 
-- [Google drive]： [annotations](https://drive.google.com/file/d/1-MF_H6OnLL-6ZAHwmwTOdxIeKY9zqGO9/view?usp=sharing); [images(0-3)](https://drive.google.com/drive/folders/1EGTIWLCLUAlKfbq7KEeHqXL8PAyKHNQ_?usp=sharing); [images(4-5)](https://drive.google.com/drive/folders/1a6E-7YI-rwSDOtjqzRf_E0leYXSNtjaW?usp=sharing);
-- [BaiduNetDisk]：[annotations and images](https://pan.baidu.com/s/1MHPF2ajDvq2y4_nTYQG3yA?pwd=tzdx);
+### Download and Extract Dataset
 
-Please choose a download method to download the annotations and all images. Make sure all the split archive files (e.g., `images.zip`, `images.z01`, `images.z02`, etc.) are in the same directory. Use the following command to extract them:
+**Linux Command:**
+
 ```bash
-unzip images.zip
-unzip annotations.zip
+pip install modelscope && \
+modelscope download --dataset lanlanlanrr/XS-VID --local_dir ./XS-VID && \
+mkdir -p ./XS-VID/{annotations,images} && \
+unzip -o ./XS-VID/annotations.zip -d ./XS-VID/annotations && \
+find ./XS-VID -name 'videos_subset_*.zip' -exec unzip -o {} -d ./XS-VID/images \; && \
+rm -f ./XS-VID/*.zip
 ```
+
+**Windows Command (CMD):**
+
+```bash
+pip install modelscope && ^
+modelscope download --dataset lanlanlanrr/XS-VID --local_dir ./XS-VID && ^
+mkdir "./XS-VID\annotations" && mkdir "./XS-VID\images" && ^
+powershell -Command "Expand-Archive -Path './XS-VID/annotations.zip' -DestinationPath './XS-VID/annotations' -Force" && ^
+for /r "./XS-VID" %f in (videos_subset_*.zip) do powershell -Command "Expand-Archive -Path '%f' -DestinationPath './XS-VID/images' -Force" && ^
+del /f /q "./XS-VID\*.zip"
+```
+### Expected Folder Structure
+```
+./XS-VID/
+├── annotations/    # Annotation files
+└── images/         # Video frames (extracted from videos_subset_*.zip)
+```
+
+### Notes
+- The script will auto-delete ZIP files after extraction.
+- Ensure sufficient disk space (~same as ZIP sizes + extracted content).
+
 If you get an error while unpacking, you can get help from [issues](https://github.com/gjhhust/XS-VID/issues)
 
 ## Codes
@@ -64,4 +92,4 @@ If you find MovieChat useful for your your research and applications, please cit
 ```
 
 ## Support or Contact
-If you have any problems about our XS-VID benchmark, please feel free to contact us at gjh_hust@hust.edu.cn.
+If you have any problems about our XS-VID benchmark, please feel free to contact us at gjh_mhust@hust.edu.cn.
