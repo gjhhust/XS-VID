@@ -1,0 +1,341 @@
+[
+  {
+    "id": "sample-1",
+    "src": "assets/explorer/sample-1.jpg",
+    "video": "DJI_0027-seg3_0",
+    "frame": 63,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "bicycle-person",
+        "bbox": [
+          420.4,
+          672.8,
+          37.5,
+          32.0
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          954.4,
+          743.4,
+          15.1,
+          17.2
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          928.9,
+          718.6,
+          20.1,
+          16.9
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          930.1,
+          803.8,
+          93.9,
+          79.4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-2",
+    "src": "assets/explorer/sample-2.jpg",
+    "video": "DJI_0027-seg3_1",
+    "frame": 0,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          409.9,
+          1004.7,
+          19.0,
+          18.4
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          256.5,
+          795.8,
+          14.3,
+          18.8
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          244.2,
+          766.3,
+          16.0,
+          16.5
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          362.0,
+          872.1,
+          113.9,
+          55.6
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          402.8,
+          784.6,
+          14.4,
+          25.4
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-3",
+    "src": "assets/explorer/sample-3.jpg",
+    "video": "DJI_0040-seg1_0",
+    "frame": 0,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "truck",
+        "bbox": [
+          491.8,
+          646.6,
+          130.0,
+          52.0
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          145.6,
+          482.9,
+          23.3,
+          26.4
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          624.9,
+          2.6,
+          42.6,
+          58.4
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          186.2,
+          657.4,
+          34.3,
+          22.2
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          266.5,
+          581.8,
+          30.5,
+          24.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-4",
+    "src": "assets/explorer/sample-4.jpg",
+    "video": "DJI_0040-seg1_1",
+    "frame": 123,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "truck",
+        "bbox": [
+          527.3,
+          772.5,
+          67.4,
+          122.8
+        ]
+      },
+      {
+        "label": "truck",
+        "bbox": [
+          589.5,
+          881.2,
+          67.2,
+          123.4
+        ]
+      },
+      {
+        "label": "truck",
+        "bbox": [
+          881.6,
+          66.2,
+          98.3,
+          114.7
+        ]
+      },
+      {
+        "label": "truck",
+        "bbox": [
+          775.4,
+          70.8,
+          65.1,
+          82.9
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          0.0,
+          69.3,
+          24.9,
+          19.8
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          26.4,
+          39.4,
+          16.6,
+          16.0
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-5",
+    "src": "assets/explorer/sample-5.jpg",
+    "video": "DJI_0027-seg8_0",
+    "frame": 0,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "person",
+        "bbox": [
+          473.3,
+          159.0,
+          15.6,
+          17.8
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          430.9,
+          203.3,
+          19.4,
+          18.2
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          0.0,
+          100.9,
+          47.2,
+          47.4
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          86.4,
+          139.7,
+          75.6,
+          53.5
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          212.3,
+          161.7,
+          94.1,
+          50.4
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          330.0,
+          149.6,
+          71.5,
+          67.1
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          422.5,
+          206.6,
+          56.4,
+          61.1
+        ]
+      },
+      {
+        "label": "car",
+        "bbox": [
+          384.7,
+          171.6,
+          70.1,
+          66.3
+        ]
+      }
+    ]
+  },
+  {
+    "id": "sample-6",
+    "src": "assets/explorer/sample-6.jpg",
+    "video": "DJI_0027-seg8_1",
+    "frame": 42,
+    "width": 1024,
+    "height": 1024,
+    "boxes": [
+      {
+        "label": "person",
+        "bbox": [
+          534.4,
+          7.0,
+          10.7,
+          12.5
+        ]
+      },
+      {
+        "label": "person",
+        "bbox": [
+          528.2,
+          13.3,
+          16.2,
+          20.0
+        ]
+      },
+      {
+        "label": "bicycle-static",
+        "bbox": [
+          724.2,
+          0.8,
+          14.1,
+          18.6
+        ]
+      }
+    ]
+  }
+]
