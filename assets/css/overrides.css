@@ -3,6 +3,7 @@
 @media(max-width:800px){.benchmark-intro,.yoloft-layout{grid-template-columns:1fr;gap:24px}.benchmark-summary h3{font-size:24px}.benchmark-panel-top,.benchmark-tools{display:block}.metric-callout{margin-top:22px}.benchmark-tools>p{margin-top:12px}.sequence-picker{grid-template-columns:1fr}.sequence-picker button{min-height:86px}.yoloft-results{grid-template-columns:1fr}.yoloft-results div,.yoloft-results div+div{padding:13px 0;border-right:0;border-bottom:1px solid var(--line)}.yoloft-results div:last-child{border-bottom:0}.explorer-controls{flex-wrap:wrap}.toggle{margin-right:0}}
 
 .explorer .split-heading > p { color: var(--muted); }
+.sample-tags .tag--person{background:#d9ee83}.sample-tags .tag--car{background:#ff8a75}.sample-tags .tag--bicycle-person{background:#8ad3e8}.sample-tags .tag--bicycle-static{background:#d6b5eb}
 .sample-strip{display:flex;gap:7px;overflow-x:auto;padding:2px 0 5px;scroll-snap-type:x mandatory}.sample-strip button{flex:0 0 68px;scroll-snap-align:start}
 @media(max-width:800px){.explorer-layout,.canvas-shell,.explorer-panel{min-width:0;max-width:100%}.explorer-layout{width:100%;overflow:hidden}.canvas-shell{width:100%;min-height:0;aspect-ratio:1;overflow:hidden}.canvas-shell canvas{width:100%;max-width:100%;height:auto;aspect-ratio:1}.explorer-panel{width:100%;overflow:hidden}.sample-strip{max-width:100%;overscroll-behavior-x:contain}}
 .benchmark .split-heading > p { color: #b3c0bb; }

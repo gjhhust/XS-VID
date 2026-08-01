@@ -74,6 +74,13 @@
   let loadGeneration = 0;
   let framesReady = false;
   let playbackTimestamp = 0;
+  const categoryColors = {
+    person: '#d9ee83',
+    car: '#ff8a75',
+    'bicycle-person': '#8ad3e8',
+    'bicycle-static': '#d6b5eb'
+  };
+  const categoryClass = label => `tag--${label.replace(/[^a-z0-9]+/gi, '-')}`;
   const currentFrame = () => sequences[sequenceIndex]?.frames[frameIndex];
   function draw() {
     const frame = currentFrame();
@@ -83,9 +90,9 @@
     if (!toggle.checked) return;
     context.lineWidth = Math.max(2, canvas.width / 420);
     context.font = `${Math.max(13, canvas.width / 65)}px Manrope`;
-    frame.boxes.forEach((box, index) => {
+    frame.boxes.forEach(box => {
       const [x, y, width, height] = box.bbox;
-      const color = index % 2 ? '#d9ee83' : '#ff8a75';
+      const color = categoryColors[box.label] || '#d9ee83';
       context.strokeStyle = color;
       context.strokeRect(x, y, width, height);
       if (width * height >= 850) {
@@ -103,7 +110,7 @@
     const frame = currentFrame();
     if (!sequence || !frame) return;
     meta.textContent = `${sequence.video} · frame ${frame.frame} · ${frame.boxes.length} annotated objects`;
-    tags.innerHTML = [...new Set(frame.boxes.map(item => item.label))].map(label => `<span>${label}</span>`).join('') || '<span>no labeled target in this frame</span>';
+    tags.innerHTML = [...new Set(frame.boxes.map(item => item.label))].map(label => `<span class="${categoryClass(label)}">${label}</span>`).join('') || '<span>no labeled target in this frame</span>';
     const areas = frame.boxes.map(item => item.bbox[2] * item.bbox[3]);
     const small = areas.filter(area => area <= 32 * 32).length;
     scale.innerHTML = `<strong>${small}/${areas.length}</strong><span>displayed boxes at small-object scale</span>`;
