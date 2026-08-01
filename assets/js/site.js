@@ -72,6 +72,8 @@
   let frameImages = [];
   let timer = null;
   let loadGeneration = 0;
+  let framesReady = false;
+  let playbackTimestamp = 0;
   const currentFrame = () => sequences[sequenceIndex]?.frames[frameIndex];
   function draw() {
     const frame = currentFrame();
@@ -136,17 +138,29 @@
     setAutoplay(false);
     renderFrame(index, true);
   }
-  function preloadFrames(sequence) {
+  function preloadFrames(sequence, generation) {
+    framesReady = false;
     frameImages = sequence.frames.map(frame => {
       const cached = new Image();
       cached.decoding = 'async';
       cached.src = frame.src;
       return cached;
     });
+    return Promise.all(frameImages.map(cached => new Promise(resolve => {
+      if (cached.complete && cached.naturalWidth) { resolve(); return; }
+      cached.addEventListener('load', resolve, { once: true });
+      cached.addEventListener('error', resolve, { once: true });
+    }))).then(() => {
+      if (generation !== loadGeneration) return;
+      framesReady = true;
+      renderFrame(frameIndex, true);
+      setAutoplay(true);
+    });
   }
   function selectSequence(index) {
     setAutoplay(false);
     loadGeneration += 1;
+    const generation = loadGeneration;
     sequenceIndex = index; frameIndex = 0;
     picker.querySelectorAll('button').forEach((button, buttonIndex) => button.classList.toggle('selected', buttonIndex === sequenceIndex));
     const sequence = sequences[sequenceIndex];
@@ -158,18 +172,32 @@
       button.addEventListener('click', () => selectFrame(indexFrame));
       strip.appendChild(button);
     });
-    preloadFrames(sequence);
+    const preload = preloadFrames(sequence, generation);
     renderFrame(0, true);
-    setAutoplay(true);
+    preload.catch(() => {});
+  }
+  function animate(timestamp) {
+    if (timer === null) return;
+    const sequence = sequences[sequenceIndex];
+    const duration = 1000 / (sequence.fps || 10);
+    if (!playbackTimestamp) playbackTimestamp = timestamp;
+    const elapsed = timestamp - playbackTimestamp;
+    if (elapsed >= duration) {
+      const steps = Math.floor(elapsed / duration);
+      playbackTimestamp += steps * duration;
+      renderFrame(frameIndex + steps);
+    }
+    timer = requestAnimationFrame(animate);
   }
   function setAutoplay(enabled) {
-    if (timer) { clearInterval(timer); timer = null; }
-    playButton.classList.toggle('active', enabled);
-    playButton.setAttribute('aria-pressed', String(enabled));
-    playButton.textContent = enabled ? 'Pause' : 'Play';
-    if (!enabled || !sequences[sequenceIndex]) return;
-    const fps = sequences[sequenceIndex].fps || 10;
-    timer = setInterval(() => renderFrame(frameIndex + 1), 1000 / fps);
+    if (timer !== null) cancelAnimationFrame(timer);
+    timer = null;
+    playbackTimestamp = 0;
+    const shouldPlay = enabled && framesReady && Boolean(sequences[sequenceIndex]);
+    playButton.classList.toggle('active', shouldPlay);
+    playButton.setAttribute('aria-pressed', String(shouldPlay));
+    playButton.textContent = shouldPlay ? 'Pause' : 'Play';
+    if (shouldPlay) timer = requestAnimationFrame(animate);
   }
   fetch('assets/explorer/sequences.json').then(response => response.json()).then(data => {
     sequences = data;
@@ -183,7 +211,7 @@
   });
   toggle.addEventListener('change', draw);
   playButton.addEventListener('click', () => {
-    const wasPlaying = Boolean(timer);
+    const wasPlaying = timer !== null;
     setAutoplay(!wasPlaying);
     if (wasPlaying) updateFrameDetails();
   });
