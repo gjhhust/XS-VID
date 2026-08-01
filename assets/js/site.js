@@ -63,6 +63,9 @@
   const scale = document.getElementById('sample-scale');
   const strip = document.getElementById('sample-strip');
   const picker = document.getElementById('sequence-picker');
+  const trackList = document.getElementById('track-list');
+  const selectAllTracks = document.getElementById('select-all-tracks');
+  const clearTracks = document.getElementById('clear-tracks');
   const toggle = document.getElementById('toggle-boxes');
   const playButton = document.getElementById('autoplay-sequence');
   let sequences = [];
@@ -74,6 +77,7 @@
   let loadGeneration = 0;
   let framesReady = false;
   let playbackTimestamp = 0;
+  let selectedTrackKeys = new Set();
   const categoryColors = {
     person: '#d9ee83',
     car: '#ff8a75',
@@ -81,7 +85,30 @@
     'bicycle-static': '#d6b5eb'
   };
   const categoryClass = label => `tag--${label.replace(/[^a-z0-9]+/gi, '-')}`;
+  const trackKey = box => `${box.label}::${box.trackId}`;
   const currentFrame = () => sequences[sequenceIndex]?.frames[frameIndex];
+  const sequenceTracks = sequence => {
+    const tracks = new Map();
+    sequence.frames.flatMap(frame => frame.boxes).forEach(box => tracks.set(trackKey(box), { label: box.label, trackId: box.trackId }));
+    return [...tracks.entries()].sort(([, a], [, b]) => a.label.localeCompare(b.label) || Number(a.trackId) - Number(b.trackId));
+  };
+  const visibleBoxes = frame => frame.boxes.filter(box => selectedTrackKeys.has(trackKey(box)));
+  function renderTrackFilter() {
+    const sequence = sequences[sequenceIndex];
+    if (!sequence) return;
+    const tracks = sequenceTracks(sequence);
+    trackList.innerHTML = tracks.map(([key, track]) => {
+      const color = categoryColors[track.label] || '#d9ee83';
+      const checked = selectedTrackKeys.has(key) ? ' checked' : '';
+      return `<label class="track-choice" style="--track-color:${color}"><input type="checkbox" data-track-key="${key}"${checked}><i></i><span>${track.label} · #${track.trackId}</span></label>`;
+    }).join('');
+    trackList.querySelectorAll('input').forEach(input => input.addEventListener('change', () => {
+      if (input.checked) selectedTrackKeys.add(input.dataset.trackKey);
+      else selectedTrackKeys.delete(input.dataset.trackKey);
+      draw();
+      updateFrameDetails();
+    }));
+  }
   function draw() {
     const frame = currentFrame();
     if (!frame || !image.complete) return;
@@ -89,19 +116,24 @@
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
     if (!toggle.checked) return;
     context.lineWidth = Math.max(2, canvas.width / 420);
-    context.font = `${Math.max(13, canvas.width / 65)}px Manrope`;
-    frame.boxes.forEach(box => {
+    const displayScale = canvas.width / Math.max(1, canvas.clientWidth || canvas.width);
+    const labelFontSize = Math.max(13 * displayScale, canvas.width / 65);
+    const labelPadding = Math.ceil(3 * displayScale);
+    const labelHeight = Math.ceil(labelFontSize + labelPadding * 2);
+    context.font = `${labelFontSize}px Manrope`;
+    visibleBoxes(frame).forEach(box => {
       const [x, y, width, height] = box.bbox;
       const color = categoryColors[box.label] || '#d9ee83';
       context.strokeStyle = color;
       context.strokeRect(x, y, width, height);
       if (width * height >= 850) {
-        const text = box.label;
-        const textWidth = context.measureText(text).width + 8;
+        const text = box.trackId === undefined || box.trackId === null ? box.label : `${box.label} · #${box.trackId}`;
+        const textWidth = context.measureText(text).width + labelPadding * 2;
+        const labelY = Math.max(0, y - labelHeight);
         context.fillStyle = color;
-        context.fillRect(x, Math.max(0, y - 18), textWidth, 18);
+        context.fillRect(x, labelY, textWidth, labelHeight);
         context.fillStyle = '#10231f';
-        context.fillText(text, x + 4, Math.max(13, y - 5));
+        context.fillText(text, x + labelPadding, labelY + labelFontSize + labelPadding / 2);
       }
     });
   }
@@ -109,9 +141,10 @@
     const sequence = sequences[sequenceIndex];
     const frame = currentFrame();
     if (!sequence || !frame) return;
-    meta.textContent = `${sequence.video} · frame ${frame.frame} · ${frame.boxes.length} annotated objects`;
-    tags.innerHTML = [...new Set(frame.boxes.map(item => item.label))].map(label => `<span class="${categoryClass(label)}">${label}</span>`).join('') || '<span>no labeled target in this frame</span>';
-    const areas = frame.boxes.map(item => item.bbox[2] * item.bbox[3]);
+    const boxes = visibleBoxes(frame);
+    meta.textContent = `${sequence.video} · frame ${frame.frame} · ${boxes.length}/${frame.boxes.length} displayed objects`;
+    tags.innerHTML = [...new Set(boxes.map(item => item.label))].map(label => `<span class="${categoryClass(label)}">${label}</span>`).join('') || '<span>no selected track in this frame</span>';
+    const areas = boxes.map(item => item.bbox[2] * item.bbox[3]);
     const small = areas.filter(area => area <= 32 * 32).length;
     scale.innerHTML = `<strong>${small}/${areas.length}</strong><span>displayed boxes at small-object scale</span>`;
     [...strip.children].forEach((item, itemIndex) => item.classList.toggle('selected', itemIndex === frameIndex));
@@ -132,8 +165,8 @@
     };
     if (target.complete && target.naturalWidth) finish();
     else {
-      loading.style.display = 'block';
-      target.onload = finish;
+      if (!framesReady) loading.style.display = 'block';
+      target.addEventListener('load', finish, { once: true });
     }
     const selected = strip.children[frameIndex];
     const previous = strip.querySelector('.selected');
@@ -153,11 +186,17 @@
       cached.src = frame.src;
       return cached;
     });
-    return Promise.all(frameImages.map(cached => new Promise(resolve => {
-      if (cached.complete && cached.naturalWidth) { resolve(); return; }
-      cached.addEventListener('load', resolve, { once: true });
-      cached.addEventListener('error', resolve, { once: true });
-    }))).then(() => {
+    return Promise.all(frameImages.map(async cached => {
+      if (!cached.complete || !cached.naturalWidth) {
+        await new Promise(resolve => {
+          cached.addEventListener('load', resolve, { once: true });
+          cached.addEventListener('error', resolve, { once: true });
+        });
+      }
+      if (cached.naturalWidth && cached.decode) {
+        try { await cached.decode(); } catch (_) {}
+      }
+    })).then(() => {
       if (generation !== loadGeneration) return;
       framesReady = true;
       renderFrame(frameIndex, true);
@@ -171,6 +210,8 @@
     sequenceIndex = index; frameIndex = 0;
     picker.querySelectorAll('button').forEach((button, buttonIndex) => button.classList.toggle('selected', buttonIndex === sequenceIndex));
     const sequence = sequences[sequenceIndex];
+    selectedTrackKeys = new Set(sequenceTracks(sequence).map(([key]) => key));
+    renderTrackFilter();
     strip.innerHTML = '';
     sequence.frames.forEach((frame, indexFrame) => {
       const button = document.createElement('button');
@@ -206,7 +247,7 @@
     playButton.textContent = shouldPlay ? 'Pause' : 'Play';
     if (shouldPlay) timer = requestAnimationFrame(animate);
   }
-  fetch('assets/explorer/sequences.json').then(response => response.json()).then(data => {
+  fetch('assets/explorer/sequences.json?v=explorer-tracks-1').then(response => response.json()).then(data => {
     sequences = data;
     sequences.forEach((sequence, index) => {
       const button = document.createElement('button');
@@ -217,6 +258,18 @@
     selectSequence(0);
   });
   toggle.addEventListener('change', draw);
+  selectAllTracks.addEventListener('click', () => {
+    selectedTrackKeys = new Set(sequenceTracks(sequences[sequenceIndex]).map(([key]) => key));
+    renderTrackFilter();
+    draw();
+    updateFrameDetails();
+  });
+  clearTracks.addEventListener('click', () => {
+    selectedTrackKeys.clear();
+    renderTrackFilter();
+    draw();
+    updateFrameDetails();
+  });
   playButton.addEventListener('click', () => {
     const wasPlaying = timer !== null;
     setAutoplay(!wasPlaying);
