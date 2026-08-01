@@ -69,7 +69,9 @@
   let sequenceIndex = 0;
   let frameIndex = 0;
   let image = new Image();
+  let frameImages = [];
   let timer = null;
+  let loadGeneration = 0;
   const currentFrame = () => sequences[sequenceIndex]?.frames[frameIndex];
   function draw() {
     const frame = currentFrame();
@@ -94,15 +96,10 @@
       }
     });
   }
-  function selectFrame(index) {
+  function updateFrameDetails() {
     const sequence = sequences[sequenceIndex];
-    if (!sequence) return;
-    frameIndex = (index + sequence.frames.length) % sequence.frames.length;
     const frame = currentFrame();
-    loading.style.display = 'block';
-    image = new Image();
-    image.onload = () => { loading.style.display = 'none'; draw(); };
-    image.src = frame.src;
+    if (!sequence || !frame) return;
     meta.textContent = `${sequence.video} · frame ${frame.frame} · ${frame.boxes.length} annotated objects`;
     tags.innerHTML = [...new Set(frame.boxes.map(item => item.label))].map(label => `<span>${label}</span>`).join('') || '<span>no labeled target in this frame</span>';
     const areas = frame.boxes.map(item => item.bbox[2] * item.bbox[3]);
@@ -110,7 +107,46 @@
     scale.innerHTML = `<strong>${small}/${areas.length}</strong><span>displayed boxes at small-object scale</span>`;
     [...strip.children].forEach((item, itemIndex) => item.classList.toggle('selected', itemIndex === frameIndex));
   }
+  function renderFrame(index, updateDetails = false) {
+    const sequence = sequences[sequenceIndex];
+    if (!sequence) return;
+    frameIndex = (index + sequence.frames.length) % sequence.frames.length;
+    const frame = currentFrame();
+    const target = frameImages[frameIndex] || new Image();
+    if (!target.src) target.src = frame.src;
+    image = target;
+    const generation = loadGeneration;
+    const finish = () => {
+      if (generation !== loadGeneration || image !== target) return;
+      loading.style.display = 'none';
+      draw();
+    };
+    if (target.complete && target.naturalWidth) finish();
+    else {
+      loading.style.display = 'block';
+      target.onload = finish;
+    }
+    const selected = strip.children[frameIndex];
+    const previous = strip.querySelector('.selected');
+    if (previous && previous !== selected) previous.classList.remove('selected');
+    if (selected) selected.classList.add('selected');
+    if (updateDetails) updateFrameDetails();
+  }
+  function selectFrame(index) {
+    setAutoplay(false);
+    renderFrame(index, true);
+  }
+  function preloadFrames(sequence) {
+    frameImages = sequence.frames.map(frame => {
+      const cached = new Image();
+      cached.decoding = 'async';
+      cached.src = frame.src;
+      return cached;
+    });
+  }
   function selectSequence(index) {
+    setAutoplay(false);
+    loadGeneration += 1;
     sequenceIndex = index; frameIndex = 0;
     picker.querySelectorAll('button').forEach((button, buttonIndex) => button.classList.toggle('selected', buttonIndex === sequenceIndex));
     const sequence = sequences[sequenceIndex];
@@ -122,14 +158,18 @@
       button.addEventListener('click', () => selectFrame(indexFrame));
       strip.appendChild(button);
     });
-    selectFrame(0);
+    preloadFrames(sequence);
+    renderFrame(0, true);
+    setAutoplay(true);
   }
   function setAutoplay(enabled) {
     if (timer) { clearInterval(timer); timer = null; }
     playButton.classList.toggle('active', enabled);
     playButton.setAttribute('aria-pressed', String(enabled));
     playButton.textContent = enabled ? 'Pause' : 'Play';
-    if (enabled) timer = setInterval(() => selectFrame(frameIndex + 1), 780);
+    if (!enabled || !sequences[sequenceIndex]) return;
+    const fps = sequences[sequenceIndex].fps || 10;
+    timer = setInterval(() => renderFrame(frameIndex + 1), 1000 / fps);
   }
   fetch('assets/explorer/sequences.json').then(response => response.json()).then(data => {
     sequences = data;
@@ -142,7 +182,11 @@
     selectSequence(0);
   });
   toggle.addEventListener('change', draw);
-  playButton.addEventListener('click', () => setAutoplay(!timer));
+  playButton.addEventListener('click', () => {
+    const wasPlaying = Boolean(timer);
+    setAutoplay(!wasPlaying);
+    if (wasPlaying) updateFrameDetails();
+  });
   document.getElementById('previous-sample').addEventListener('click', () => { setAutoplay(false); selectFrame(frameIndex - 1); });
   document.getElementById('next-sample').addEventListener('click', () => { setAutoplay(false); selectFrame(frameIndex + 1); });
   window.addEventListener('resize', draw);
