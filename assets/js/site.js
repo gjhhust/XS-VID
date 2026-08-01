@@ -68,6 +68,7 @@
   const clearTracks = document.getElementById('clear-tracks');
   const toggle = document.getElementById('toggle-boxes');
   const playButton = document.getElementById('autoplay-sequence');
+  toggle.checked = true;
   let sequences = [];
   let sequenceIndex = 0;
   let frameIndex = 0;
@@ -115,8 +116,8 @@
     canvas.width = frame.width; canvas.height = frame.height;
     context.drawImage(image, 0, 0, canvas.width, canvas.height);
     if (!toggle.checked) return;
-    context.lineWidth = Math.max(2, canvas.width / 420);
     const displayScale = canvas.width / Math.max(1, canvas.clientWidth || canvas.width);
+    context.lineWidth = Math.max(2 * displayScale, canvas.width / 420);
     const labelFontSize = Math.max(13 * displayScale, canvas.width / 65);
     const labelPadding = Math.ceil(3 * displayScale);
     const labelHeight = Math.ceil(labelFontSize + labelPadding * 2);
