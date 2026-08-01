@@ -17,7 +17,7 @@ title: XS-VID
 <body>
 <header class="topbar">
   <a class="wordmark" href="#top">XS<span>-</span>VID</a>
-  <nav aria-label="Primary navigation"><a href="#data">Data</a><a href="#explorer">Explore</a><a href="#benchmark">Benchmark</a><a href="#release">Release</a></nav>
+  <nav aria-label="Primary navigation"><a href="#data">Data</a><a href="#benchmark">Benchmarks</a><a href="#yoloft">YOLOFT</a><a href="#explorer">Explore</a><a href="#release">Release</a></nav>
   <a class="nav-github" href="https://github.com/gjhhust/XS-VID">GitHub ↗</a>
 </header>
 <main id="top">
@@ -26,7 +26,7 @@ title: XS-VID
       <p class="eyebrow">A benchmark for video understanding at the smallest scales</p>
       <h1>Small objects.<br><em>Full video context.</em></h1>
       <p class="lede">XS-VID is a densely annotated benchmark for video object detection, multi-object tracking, and single-object tracking in scenes where target scale is the central difficulty.</p>
-      <div class="hero-actions"><a class="button button-primary" href="#release">Get XS-VID v2 ↓</a><a class="button button-secondary" href="#explorer">Explore annotations →</a></div>
+      <div class="hero-actions"><a class="button button-primary" href="#release">Get XS-VID v2 ↓</a><a class="button button-secondary" href="#benchmark">Browse benchmarks →</a></div>
     </div>
     <div class="hero-visual"><img src="assets/explorer/sample-1.jpg" alt="Aerial road scene from XS-VID"><i class="box one"></i><i class="box two"></i><i class="box three"></i><p class="frame-caption"><b></b>Annotated video frame · 1024 × 1024</p></div>
   </section>
@@ -35,13 +35,20 @@ title: XS-VID
     <div class="stats-grid"><article><strong>374</strong><span>video sequences</span></article><article><strong>223K</strong><span>annotated frames</span></article><article><strong>1.4M</strong><span>bounding boxes</span></article><article><strong>7</strong><span>object categories</span></article></div>
     <div class="data-notes"><p>XS-VID v2 provides a shared data contract across <b>Detection</b>, <b>MOT</b>, and <b>SOT</b>. The release contains media, unified annotations, development splits, evaluators, and task-specific protocol files.</p><a href="#release">Inspect the release ↓</a></div>
   </section>
-  <section id="explorer" class="section explorer">
-    <div class="section-heading split-heading"><div><p class="eyebrow">Annotation explorer</p><h2>Inspect the scale of the problem.</h2></div><p>Browse annotated frames from varied scenes. Toggle boxes to inspect the visual evidence before and after annotation overlay.</p></div>
-    <div class="explorer-layout"><div class="canvas-shell"><canvas id="annotation-canvas" aria-label="Interactive annotated XS-VID image"></canvas><span class="canvas-loading">Loading sample</span></div><div class="explorer-panel"><div class="explorer-controls"><label class="toggle"><input id="toggle-boxes" type="checkbox" checked><span></span>Show annotations</label><button id="previous-sample" class="icon-button" aria-label="Previous sample">←</button><button id="next-sample" class="icon-button" aria-label="Next sample">→</button></div><p id="sample-meta" class="mono"></p><div id="sample-tags" class="sample-tags"></div><div id="sample-scale" class="sample-scale"></div><div class="sample-strip" id="sample-strip"></div><p class="explorer-note">Boxes are public ground-truth annotations rendered at their native image coordinates.</p></div></div>
-  </section>
   <section id="benchmark" class="section benchmark">
-    <div class="section-heading split-heading"><div><p class="eyebrow">Unified benchmark</p><h2>One dataset, three video tasks.</h2></div><p>Switch tracks to review the released baselines and metrics. Evaluation scripts and protocol files are included in the code release.</p></div>
-    <div class="task-switcher" role="tablist" aria-label="Benchmark task"><button class="task-tab active" data-task="detection">Detection</button><button class="task-tab" data-task="mot">MOT</button><button class="task-tab" data-task="sot">SOT</button></div><div id="benchmark-content" class="benchmark-content"></div>
+    <div class="section-heading split-heading"><div><p class="eyebrow">Benchmark results</p><h2>Three tracks. One difficult scale regime.</h2></div><p>Compare every evaluated method under the released protocols, then open its official paper or implementation directly from the table.</p></div>
+    <div class="benchmark-intro"><figure class="benchmark-map"><img src="assets/benchmark/xsvid-benchmark-map.png" alt="AP versus latency comparison across XS-VID detection baselines"><figcaption><span>Detection landscape</span>Bubble area denotes FLOPs. Established VOD methods occupy the high-latency, low-AP region on XS-VID.</figcaption></figure><div class="benchmark-summary"><p class="eyebrow">What the benchmark reveals</p><h3>Temporal input alone is not enough at extremely small scales.</h3><p>The Detection table makes the transfer gap visible: several established VOD systems are substantially heavier than single-frame alternatives while remaining far from the leading XS-VID AP. The MOT and SOT views extend this comparison to trajectory-level evaluation.</p><a class="benchmark-paper-link" href="https://arxiv.org/abs/2407.18137">Read the benchmark paper ↗</a></div></div>
+    <div class="task-switcher" role="tablist" aria-label="Benchmark task"><button class="task-tab active" data-task="detection">Detection</button><button class="task-tab" data-task="mot">MOT</button><button class="task-tab" data-task="sot">SOT</button></div>
+    <div id="benchmark-content" class="benchmark-content"></div>
+  </section>
+  <section id="yoloft" class="section yoloft">
+    <div class="section-heading split-heading"><div><p class="eyebrow">YOLOFT baseline</p><h2>A temporal baseline shaped by the benchmark.</h2></div><p>YOLOFT strengthens fine-scale evidence before local temporal aggregation, while retaining an efficient Detection path.</p></div>
+    <div class="yoloft-layout"><figure class="yoloft-figure"><img src="imgs/XS-VID_challenge.png" alt="Illustration of XS-VID small-object video challenges"><figcaption>XS-VID exposes weak target evidence, scale variation, and temporal ambiguity simultaneously.</figcaption></figure><div class="yoloft-copy"><p>YOLOFT-L is the released baseline for the Detection track. Its shared temporal representation also supports the released MOT and SOT task extensions.</p><div class="yoloft-results"><div><strong>29.3</strong><span>Detection AP</span></div><div><strong>31.5</strong><span>MOT TAO mAP</span></div><div><strong>59.63</strong><span>SOT success AUC</span></div></div><div class="yoloft-actions"><a class="button button-primary" href="https://github.com/gjhhust/YOLOFT">Open YOLOFT code ↗</a><a class="button button-secondary" href="#benchmark">Compare all methods</a></div></div></div>
+  </section>
+  <section id="explorer" class="section explorer">
+    <div class="section-heading split-heading"><div><p class="eyebrow">Sequence explorer</p><h2>Follow targets frame by frame.</h2></div><p>Browse public ground-truth annotations from contrasting video scenes. Play a sequence or inspect each frame at native image coordinates.</p></div>
+    <div class="sequence-picker" id="sequence-picker" aria-label="Select an XS-VID sequence"></div>
+    <div class="explorer-layout"><div class="canvas-shell"><canvas id="annotation-canvas" aria-label="Interactive annotated XS-VID sequence"></canvas><span class="canvas-loading">Loading sequence</span></div><div class="explorer-panel"><div class="explorer-controls"><label class="toggle"><input id="toggle-boxes" type="checkbox" checked><span></span>Show annotations</label><button id="autoplay-sequence" class="play-button" aria-pressed="false">Play</button><button id="previous-sample" class="icon-button" aria-label="Previous frame">←</button><button id="next-sample" class="icon-button" aria-label="Next frame">→</button></div><p id="sample-meta" class="mono"></p><div id="sample-tags" class="sample-tags"></div><div id="sample-scale" class="sample-scale"></div><div class="sample-strip" id="sample-strip"></div><p class="explorer-note">Boxes are public ground-truth annotations rendered at their native image coordinates.</p></div></div>
   </section>
   <section id="release" class="section get-started">
     <div class="section-heading"><p class="eyebrow">Release v2</p><h2>From download to reproducible evaluation.</h2></div>
