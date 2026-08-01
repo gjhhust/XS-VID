@@ -80,8 +80,8 @@
   let playbackTimestamp = 0;
   let selectedTrackKeys = new Set();
   const categoryColors = {
-    person: '#d9ee83',
-    car: '#ff8a75',
+    person: '#ff8a75',
+    car: '#d9ee83',
     'bicycle-person': '#8ad3e8',
     'bicycle-static': '#d6b5eb'
   };
