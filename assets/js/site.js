@@ -233,7 +233,7 @@
     if (elapsed >= duration) {
       const steps = Math.floor(elapsed / duration);
       playbackTimestamp += steps * duration;
-      renderFrame(frameIndex + steps);
+      renderFrame(frameIndex + steps, true);
     }
     timer = requestAnimationFrame(animate);
   }
