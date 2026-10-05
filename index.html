@@ -12,7 +12,7 @@ title: XS-VID
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/overrides.css?v=explorer-responsive-1">
+  <link rel="stylesheet" href="assets/css/overrides.css?v=download-cli-20261006">
 </head>
 <body>
 <header class="topbar">
@@ -24,7 +24,8 @@ title: XS-VID
   <section class="hero">
     <div class="hero-copy">
       <p class="eyebrow">A benchmark for video understanding at the smallest scales</p>
-      <h1>Small objects.<br><em>Full video context.</em></h1>
+      <h1>XS-VID</h1>
+      <p class="publication"><a href="https://doi.org/10.1109/TPAMI.2026.3741044">XS-VID: A Large-Scale Benchmark for Small Object Detection and Tracking in Videos</a><br><strong>IEEE TPAMI, 2026 (accepted)</strong></p>
       <p class="lede">XS-VID is a densely annotated benchmark for video object detection, multi-object tracking, and single-object tracking in scenes where target scale is the central difficulty.</p>
       <div class="hero-actions"><a class="button button-primary" href="#release">Get XS-VID v2 ↓</a><a class="button button-secondary" href="#benchmark">Browse benchmarks →</a></div>
     </div>
@@ -36,14 +37,35 @@ title: XS-VID
     <div class="data-notes"><p>XS-VID v2 provides a shared data contract across <b>Detection</b>, <b>MOT</b>, and <b>SOT</b>. The release contains media, unified annotations, development splits, and task-specific protocol files. Runnable evaluators are provided in the code release.</p><a href="#release">Inspect the release ↓</a></div>
   </section>
   <section id="benchmark" class="section benchmark">
-    <div class="section-heading split-heading"><div><p class="eyebrow">Benchmark results</p><h2>Three tracks. One difficult scale regime.</h2></div><p>Compare every evaluated method under the released protocols, then open its official paper or implementation directly from the table.</p></div>
-    <div class="benchmark-intro"><figure class="benchmark-map"><img src="assets/benchmark/xsvid-benchmark-map.png" alt="AP versus latency comparison across XS-VID detection baselines"><figcaption><span>Detection landscape</span>Bubble area denotes FLOPs. Established VOD methods occupy the high-latency, low-AP region on XS-VID.</figcaption></figure><div class="benchmark-summary"><p class="eyebrow">What the benchmark reveals</p><h3>Temporal input alone is not enough at extremely small scales.</h3><p>The Detection table makes the transfer gap visible: several established VOD systems are substantially heavier than single-frame alternatives while remaining far from the leading XS-VID AP. The MOT and SOT views extend this comparison to trajectory-level evaluation.</p><a class="benchmark-paper-link" href="https://arxiv.org/abs/2407.18137">Read the benchmark paper ↗</a></div></div>
+    <div class="section-heading split-heading"><div><p class="eyebrow">Paper-reported benchmark results</p><h2>Three tracks. One difficult scale regime.</h2></div><p>The tables below report the accepted paper's results, not a fresh evaluation of the public checkpoints. Paper-compatible and corrected canonical protocols are distinct.</p></div>
+    <div class="benchmark-intro"><figure class="benchmark-map"><img src="assets/benchmark/xsvid-benchmark-map.png" alt="AP versus latency comparison across XS-VID detection baselines"><figcaption><span>Detection landscape</span>Bubble area denotes FLOPs. Established VOD methods occupy the high-latency, low-AP region on XS-VID.</figcaption></figure><div class="benchmark-summary"><p class="eyebrow">What the benchmark reveals</p><h3>Temporal input alone is not enough at extremely small scales.</h3><p>The Detection table makes the transfer gap visible: several established VOD systems are substantially heavier than single-frame alternatives while remaining far from the leading XS-VID AP. The MOT and SOT views extend this comparison to trajectory-level evaluation.</p><a class="benchmark-paper-link" href="https://doi.org/10.1109/TPAMI.2026.3741044">Read the accepted paper ↗</a></div></div>
     <div class="task-switcher" role="tablist" aria-label="Benchmark task"><button class="task-tab active" data-task="detection">Detection</button><button class="task-tab" data-task="mot">MOT</button><button class="task-tab" data-task="sot">SOT</button></div>
+    <p class="result-provenance">Paper source: <a href="https://doi.org/10.1109/TPAMI.2026.3741044">IEEE TPAMI, 2026 (accepted)</a>; <a href="https://arxiv.org/abs/2407.18137">arXiv manuscript</a>. Use the dataset README and <a href="https://github.com/gjhhust/YOLOFT#single-object-tracking-sot">public evaluation guide</a> for protocol and checkpoint details.</p>
     <div id="benchmark-content" class="benchmark-content"></div>
+    <div class="result-provenance release-gate">
+      <h3>Fresh reproduction results (2026-10-06)</h3>
+      <p><strong>Detection (paper protocol): PASS.</strong> Fresh full VID inference scored AP <code>0.29312364250948897</code>, exactly matching the paper reference (29.3% rounded). <a href="audit/vid_verification.json">Detection evidence</a>.</p>
+      <p><strong>SOT: PASS.</strong> Corrected, freshly downloaded weights match the paper on all 272 sequences.</p>
+      <p><strong>Unified MOT: overall mAP reproduced (2026-10-06).</strong> Fresh TAO mAP is 31.5%, matching the paper at reported precision. APs / APm / APs* / APm* are 21.3 / 32.7 / 16.3 / 40.3%, versus paper 21.7 / 32.8 / 16.4 / 40.4% (fresh minus paper: -0.4 / -0.1 / -0.1 / -0.1 percentage points). This is not an all-metric exact match. <a href="audit/mot_verification.json">MOT evidence</a>.</p>
+      <p><strong>TBD: fresh score differs.</strong> 66/66 videos completed per run report. TAO mAP 31.9% versus paper 32.1% (-0.2 percentage points); APs / APm / APs* / APm* are 22.1 / 33.2 / 16.9 / 40.8%, versus paper 22.4 / 33.4 / 18.1 / 40.8% (deltas -0.3 / -0.2 / -1.2 / 0.0 points). Fresh MOTA 36.94204% / IDF1 54.57008% versus paper 37.1% / 54.7%; historical replay 37.0705% / 54.6878% is not fresh inference. <a href="audit/tbd_verification.json">TBD evidence</a>.</p>
+      <p>The HF dataset/model repositories and ModelScope dataset mirror are public, with anonymous metadata/document access verified. The full HF anonymous model CLI verified its pinned runtime weights, GT ZIP and protocol metadata; full anonymous dataset CLI preparation is a separate check. <a href="audit/publication_snapshot.json">Public repository verification</a>. This release covers XS-VID Detection/MOT/SOT only.</p>
+      <p><strong>Fresh unified MOTChallenge:</strong> MOTA 30.37604% / IDF1 54.94351%, versus paper 30.7% / 55.2%. Historical archived replay 30.6686% / 55.1525% (user-reported) is not fresh inference; fresh minus replay is about -0.29 / -0.21 percentage points. See the MOT evidence for scoring coverage and protocol caveats.</p>
+      <p><strong>Checkpoint scope: YOLOFT-L only.</strong> The YOLOFT-S paper AP 25.8% is not reproduced by the historical S candidate AP 22.249%; that candidate is not release-ready. The paper tables do not imply all rows have been verified.</p>
+    </div>
+    <div class="sot-provenance">
+      <h3>YOLOFT-L SOT: verified (2026-10-06)</h3>
+      <p>Checkpoint <code>yoloft-l-xsvid-v2-sot.pt</code>, SHA-256 <code>c59639f868a5fdfa5474f072d657bafb072430c7386b12901e3bc1ac7a42188a</code>, was freshly downloaded and verified by full GPU inference on all 272 sequences (107788 frames).</p>
+      <p><strong>SOT verified (2026-10-06).</strong> Fresh inference exactly matches the paper reference: success AUC <code>0.5962858499675809</code> and precision at 20 pixels <code>0.8134921266242936</code> (59.63% / 81.35% when rounded). <a class="benchmark-paper-link" href="audit/sot_verification.json">SOT verification evidence</a>; job <code>20261006-01244647-a2vwi7</code>.</p>
+      <p>Verification covers the corrected YOLOFT-L SOT checkpoint. Other paper-table rows are not implied verified; fresh MOT/TBD differences are disclosed separately above and in the reproduction guide.</p>
+      <details class="guide-details sot-history"><summary>Historical SOT checkpoint correction</summary>
+        <div class="table-wrap"><table class="results-table provenance-table"><caption>Success AUC and precision at 20 pixels (%), historical results</caption><thead><tr><th scope="col">Source</th><th scope="col">Success AUC</th><th scope="col">Precision @ 20 px</th></tr></thead><tbody><tr><th scope="row">Accepted paper / push checkpoint</th><td>59.63</td><td>81.35</td></tr><tr><th scope="row">Earlier release / wrong checkpoint</th><td>57.09</td><td>79.35</td></tr></tbody></table></div>
+        <p>The earlier release mistakenly packaged <code>sot_tt_f918jt.pt</code> (<code>dc2fc4263258</code>) instead of the paper's <code>sot_tt_f918jt_push.pt</code> (<code>c59639f868a5</code>). The corrected checkpoint and fresh verification are documented above.</p>
+      </details>
+    </div>
   </section>
   <section id="yoloft" class="section yoloft">
     <div class="section-heading split-heading"><div><p class="eyebrow">YOLOFT baseline</p><h2>A temporal baseline shaped by the benchmark.</h2></div><p>YOLOFT strengthens fine-scale evidence before local temporal aggregation, while retaining an efficient Detection path.</p></div>
-    <div class="yoloft-layout"><figure class="yoloft-figure"><img src="imgs/XS-VID_challenge.png" alt="Illustration of XS-VID small-object video challenges"><figcaption>XS-VID exposes weak target evidence, scale variation, and temporal ambiguity simultaneously.</figcaption></figure><div class="yoloft-copy"><p>YOLOFT-L is the released baseline for the Detection track. Its shared temporal representation also supports the released MOT and SOT task extensions.</p><div class="yoloft-results"><div><strong>29.3</strong><span>Detection AP</span></div><div><strong>31.5</strong><span>MOT TAO mAP</span></div><div><strong>59.63</strong><span>SOT success AUC</span></div></div><div class="yoloft-actions"><a class="button button-primary" href="https://github.com/gjhhust/YOLOFT">Open YOLOFT code ↗</a><a class="button button-secondary" href="#benchmark">Compare all methods</a></div></div></div>
+    <div class="yoloft-layout"><figure class="yoloft-figure"><img src="imgs/XS-VID_challenge.png" alt="Illustration of XS-VID small-object video challenges"><figcaption>XS-VID exposes weak target evidence, scale variation, and temporal ambiguity simultaneously.</figcaption></figure><div class="yoloft-copy"><p>YOLOFT-L is the released baseline for the Detection track. The paper evaluates MOT and SOT extensions of its temporal representation; the public code provides task-specific checkpoint workflows.</p><div class="yoloft-results"><div><strong>29.3</strong><span>Paper Detection AP</span></div><div><strong>31.5</strong><span>Paper MOT TAO mAP</span></div><div><strong>59.63</strong><span>Paper SOT success AUC</span></div></div><p class="yoloft-provenance">SOT verified (2026-10-06): fresh corrected-checkpoint GPU inference matches paper 59.63 AUC / 81.35 precision on all 272 sequences. Task-specific YOLOFT-L verification does not establish that all paper rows match.</p><div class="yoloft-actions"><a class="button button-primary" href="https://github.com/gjhhust/YOLOFT">Open YOLOFT code ↗</a><a class="button button-secondary" href="#benchmark">Compare all methods</a></div></div></div>
   </section>
   <section id="explorer" class="section explorer">
     <div class="section-heading split-heading"><div><p class="eyebrow">Sequence explorer</p><h2>Follow targets in motion.</h2></div><p>Browse public ground-truth annotations across contiguous video frames, then inspect any frame at native image coordinates.</p></div>
@@ -52,16 +74,27 @@ title: XS-VID
   </section>
   <section id="release" class="section get-started">
     <div class="section-heading"><p class="eyebrow">Release v2</p><h2>From download to reproducible evaluation.</h2></div>
-    <div class="release-grid"><article class="release-card"><span>01 / DATA</span><h3>Download XS-VID v2</h3><p>Media, unified train/test annotations, development views, and protocol files are distributed together.</p><div><a href="https://huggingface.co/datasets/lanlanlan23/XS-VID-v2">Hugging Face ↗</a></div></article><article class="release-card"><span>02 / CODE</span><h3>Run YOLOFT</h3><p>The code release includes the temporal Detection backbone and task-specific MOT and SOT workflows.</p><div><a href="https://github.com/gjhhust/YOLOFT">YOLOFT code ↗</a></div></article><article class="release-card"><span>03 / EVALUATION</span><h3>Evaluate a track</h3><p>Runnable Detection, TAO-compatible MOT, Track-by-Detection, and SOT evaluation commands are provided in the code release.</p><div><a href="https://github.com/gjhhust/YOLOFT">Evaluation guide ↗</a></div></article></div>
-    <div class="command-block"><div><span class="mono">Quick start</span><button id="copy-command" class="copy-button">Copy</button></div><code id="quick-command">git clone https://github.com/gjhhust/YOLOFT.git && cd YOLOFT && pip install -e &quot;.[xsvid]&quot;</code></div>
+    <div class="release-grid"><article class="release-card"><span>01 / DATA</span><h3>Download XS-VID v2</h3><p>Media, unified train/test annotations, development views, and protocol files are distributed together.</p><div><a href="https://huggingface.co/datasets/lanlanlan23/XS-VID-v2">Hugging Face ↗</a><a href="https://modelscope.cn/datasets/lanlanlanrr/XS-VID-v2">ModelScope ↗</a></div></article><article class="release-card"><span>02 / CODE</span><h3>Run YOLOFT</h3><p>The code release includes the temporal Detection backbone and task-specific MOT and SOT workflows.</p><div><a href="https://github.com/gjhhust/YOLOFT">YOLOFT code ↗</a></div></article><article class="release-card"><span>03 / EVALUATION</span><h3>Evaluate a track</h3><p>Runnable Detection, TAO-compatible MOT, Track-by-Detection, and SOT evaluation commands are provided in the code release.</p><div><a href="https://github.com/gjhhust/YOLOFT">Evaluation guide ↗</a></div></article></div>
+    <div class="download-guide">
+      <h3>Download and prepare XS-VID v2</h3>
+      <p>From the YOLOFT checkout, one standard-library command downloads the dataset, verifies archive hashes, extracts images and generates labels/splits. No hub SDK is needed. Both dataset mirrors are public.</p>
+      <div class="command-block"><div><span class="mono">ModelScope dataset; HF alternative in guide</span></div><pre><code>git clone https://github.com/gjhhust/YOLOFT.git
+cd YOLOFT
+python tools/xsvid/download_release.py --hub ms --destination ./downloads</code></pre></div>
+      <p>Use <code>--hub hf --component model</code> for checkpoints. See the <a href="DOWNLOAD.html">download and reproduction guide</a> for output paths, protocol selection and optional SDK alternatives.</p>
+    </div>
+    <div class="command-block"><div><span class="mono">YOLOFT code setup</span><button id="copy-command" class="copy-button" title="Copy code setup command">Copy</button></div><code id="quick-command">git clone https://github.com/gjhhust/YOLOFT.git && cd YOLOFT && pip install -e &quot;.[xsvid]&quot;</code></div>
   </section>
-  <section class="section acknowledgement"><div class="ack-grid"><div><p class="eyebrow">Citation</p><h2>Use XS-VID in your work.</h2></div><div><pre>@article{guo2024xsvid,
-  title={XS-VID: An Extremely Small Video Object Detection Dataset},
+  <section class="section acknowledgement"><div class="ack-grid"><div><p class="eyebrow">Citation</p><h2>Use XS-VID in your work.</h2><p>IEEE TPAMI, 2026 (accepted). Volume, issue, and pages are not specified here.</p></div><div><pre>@article{guo2026xsvid,
+  title={{XS-VID}: A Large-Scale Benchmark for Small Object Detection and Tracking in Videos},
   author={Guo, Jiahao and Xu, Ziyang and Wu, Lianjun and Gao, Fei and Liu, Wenyu and Wang, Xinggang},
-  journal={arXiv preprint arXiv:2407.18137}, year={2024}
-}</pre><a class="text-link" href="https://arxiv.org/abs/2407.18137">Read the arXiv paper ↗</a></div></div><p class="ack-note">Acknowledgements: the release builds on and includes integrations adapted from <a href="https://github.com/ultralytics/ultralytics">Ultralytics</a>, <a href="https://github.com/OpenGVLab/InternImage">DCNv3 / InternImage</a>, <a href="https://github.com/NirAharon/BoT-SORT">BoT-SORT</a>, <a href="https://github.com/SwinTransformer/TransT">TransT</a>, and their respective dependencies. Please consult the included licenses before redistribution or commercial use.</p></section>
+  journal={IEEE Transactions on Pattern Analysis and Machine Intelligence},
+  year={2026},
+  doi={10.1109/TPAMI.2026.3741044},
+  note={Accepted}
+}</pre><a class="text-link" href="https://doi.org/10.1109/TPAMI.2026.3741044">DOI: 10.1109/TPAMI.2026.3741044 ↗</a><br><a class="text-link" href="https://arxiv.org/abs/2407.18137">Read the arXiv manuscript ↗</a></div></div><p class="ack-note">Acknowledgements: the release builds on and includes integrations adapted from <a href="https://github.com/ultralytics/ultralytics">Ultralytics</a>, <a href="https://github.com/OpenGVLab/InternImage">DCNv3 / InternImage</a>, <a href="https://github.com/NirAharon/BoT-SORT">BoT-SORT</a>, <a href="https://github.com/SwinTransformer/TransT">TransT</a>, and their respective dependencies. Please consult the included licenses before redistribution or commercial use.</p></section>
 </main>
-<footer><span>XS-VID · Small Object Detection and Tracking in Videos</span><span><a href="https://arxiv.org/abs/2407.18137">Paper ↗</a> · <a href="https://github.com/gjhhust/XS-VID">Dataset ↗</a> · <a href="https://github.com/gjhhust/YOLOFT">Code ↗</a></span></footer>
-<script src="assets/js/site.js?v=explorer-responsive-1"></script>
+<footer><span>XS-VID · Small Object Detection and Tracking in Videos</span><span><a href="https://doi.org/10.1109/TPAMI.2026.3741044">Accepted paper ↗</a> · <a href="https://github.com/gjhhust/XS-VID">Dataset ↗</a> · <a href="https://github.com/gjhhust/YOLOFT">Code ↗</a></span></footer>
+<script src="assets/js/site.js?v=download-cli-20261006"></script>
 </body>
 </html>

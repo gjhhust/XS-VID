@@ -1,0 +1,34 @@
+{
+  "snapshot_date": "2026-10-06",
+  "scope": ["XS-VID Detection", "XS-VID MOT", "XS-VID SOT"],
+  "visdrone_is_release_blocker": false,
+  "checkpoint_scope": "Task-specific YOLOFT-L checkpoints only; not all paper benchmark rows",
+  "detection_l": "Paper-protocol AP reproduced; see vid_verification.json",
+  "sot_l": "Corrected checkpoint full 272-sequence reproduction verified; see sot_verification.json",
+  "unified_mot_l": "TAO overall mAP 31.5 reproduced at reported precision; subset AP and fresh MOTChallenge deltas disclosed in mot_verification.json",
+  "tbd_l": "Fresh TAO 31.9 vs paper 32.1 and MOTChallenge deltas disclosed; CPU recovery done exit 0. See tbd_verification.json",
+  "hf_hash_and_fresh_gpu_startup": "321/321 SHA match and bounded startup receipts read; not anonymous access or full retraining. See download_startup_snapshot.json",
+  "detection_s": {
+    "evidence_source": "User report; historical candidate result, not a fresh accepted release receipt",
+    "historical_candidate_ap_percent": 22.249,
+    "paper_ap_percent": 25.8,
+    "release_ready": false,
+    "paper_row_verified": false
+  },
+  "coordination_user_reported": {
+    "tbd": "66/66 complete; terminal closed after valid score; CPU recovery done exit 0, no GPU repeat",
+    "modelscope": "Published visibility 5; anonymous 321 SHA metadata, four document bodies and six range samples verified by receipt; not full all-file redownload",
+    "huggingface": "Dataset/model public by receipt; anonymous model CLI done exit 0; full anonymous dataset CLI still running at snapshot",
+    "portable_legacy_protocol": "Ready, agent integrating; public integration not accepted here",
+    "public_code_review": "Native public-code checks 61 PASS; four fixes done, user-reported",
+    "fresh_data_training_hf_sha_gates": "All PASS, user-reported; not anonymous public-gate acceptance"
+  },
+  "anonymous_all_gate_receipt_received": false,
+  "overall_release_accepted": false,
+  "publication_receipts_received": true,
+  "local_public_guide_activation_authorized": true,
+  "public_guide_template_activated": true,
+  "publication_snapshot": "publication_snapshot.json",
+  "push_authorized": false,
+  "push_destination_after_explicit_acceptance": "pages"
+}

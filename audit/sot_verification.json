@@ -1,0 +1,35 @@
+{
+  "verified_date": "2026-10-06",
+  "gate_status": "PASS",
+  "verification_scope": "Freshly downloaded corrected SOT checkpoint, complete GPU inference and scoring",
+  "job_id": "20261006-01244647-a2vwi7",
+  "source_metrics": "sot_inference/metrics.json in the parent release reaudit workspace",
+  "source_job_stdout_marker": "XSVID_SOT_SCORE_OK",
+  "checkpoint": {
+    "release_filename": "yoloft-l-xsvid-v2-sot.pt",
+    "source_artifact": "sot_tt_f918jt_push.pt",
+    "sha256": "c59639f868a5fdfa5474f072d657bafb072430c7386b12901e3bc1ac7a42188a",
+    "downloaded_bytes_sha256_checked": true
+  },
+  "metrics": {
+    "sequences": 272,
+    "frames": 107788,
+    "success_auc": 0.5962858499675809,
+    "overlap_precision_50": 0.7004514237649933,
+    "overlap_precision_75": 0.5192810336532002,
+    "precision_20px": 0.8134921266242936,
+    "normalized_precision_20": 0.6993353459299226,
+    "mean_iou": 0.6053750057150369
+  },
+  "paper_reference_exact_match": true,
+  "job_queue_snapshot_state": "running",
+  "overall_release_accepted": false,
+  "public_model_access_verified_at_inference_snapshot": false,
+  "current_public_model_access_snapshot": "publication_snapshot.json",
+  "visibility_note": "Historical inference snapshot preceded publication. HF model is now public and anonymous model CLI preparation completed; see publication_snapshot.json. This inference receipt alone does not establish all public gates.",
+  "other_task_status": {
+    "vid": "Paper-protocol reproduction PASS: AP 0.29312364250948897; see vid_verification.json.",
+    "mot": "Overall TAO mAP reproduced at reported precision; subset AP deltas remain. See mot_verification.json.",
+    "tbd": "66/66 complete per user; fresh TAO and MOTChallenge paper deltas disclosed; CPU recovery done exit 0. See tbd_verification.json."
+  }
+}

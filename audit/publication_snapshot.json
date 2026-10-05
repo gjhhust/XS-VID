@@ -1,0 +1,43 @@
+{
+  "snapshot_date": "2026-10-06",
+  "scope": "XS-VID Detection/MOT/SOT and task-specific YOLOFT-L package; VisDrone excluded, S checkpoint not verified",
+  "hf": {
+    "source_receipt": "hf_publication_receipt.json in parent workspace",
+    "dataset": {"repo": "lanlanlan23/XS-VID-v2", "private": false, "revision": "d6cbae5448f87b205794479ad68f5e5f38fa89e9"},
+    "model": {"repo": "lanlanlan23/YOLOFT-XSVID-v2", "private": false, "revision": "9616de3539dd87fd76e201f33ad3658b34ca0dfa"},
+    "anonymous_dataset_cli": {"job_id": "20261006-02432285-fb67ib", "snapshot_state": "running", "snapshot_exit_code": null, "full_download_complete_verified": false},
+    "anonymous_model_cli": {"job_id": "20261006-02432659-r1tpc5", "snapshot_state": "done", "snapshot_exit_code": 0, "stdout_marker": "RELEASE_PREPARED (integrity/preparation only, not GPU reproduction)", "model_download_preparation_verified": true, "full_requested_model_cli_download_verified": true, "scope": "All pinned runtime weights, GT ZIP and protocol metadata requested by the model CLI; not all incidental repository files"},
+    "anonymous_files_cpu_strict_load": "New main-submitted job, user-reported; not yet verified here",
+    "anonymous_metadata_and_readme_probe": "hf_anonymous_probe.json"
+  },
+  "modelscope": {
+    "repo": "lanlanlanrr/XS-VID-v2",
+    "source_publication_receipt": "modelscope_audit/publication_receipt.json in parent workspace",
+    "source_anonymous_receipt": "modelscope_audit/public_anonymous_results/receipt.json in parent workspace",
+    "publication_status": "published_dataset_only_verified_visibility_5",
+    "authenticated_visibility": 5,
+    "anonymous_visibility": 5,
+    "anonymous_receipt_status": "passed_anonymous_public_smoke",
+    "canonical_files": 321,
+    "sha_metadata_mismatches": 0,
+    "actual_document_downloads": 4,
+    "document_body_bytes_match": true,
+    "archive_range_samples": 6,
+    "sampled_archive_count": 3,
+    "range_status": 206,
+    "ranges_match_prior_download": true,
+    "extra_files_retained": [".gitattributes", "tools/__pycache__/build_unified_annotations.cpython-310.pyc", "tools/__pycache__/prepare_yolo_labels.cpython-310.pyc"],
+    "full_anonymous_all_file_download_verified": false,
+    "full_anonymous_dataset_cli_state_user_reported": "running; metadata/SOT files being downloaded, no errors reported"
+  },
+  "public_code_commit": "297a612f2fd65f66df15a069e7b12125437029bd",
+  "public_code_push_reported_by_main": true,
+  "local_public_guide_activation_authorized": true,
+  "public_guide_template_activated_locally": true,
+  "all_anonymous_full_cli_downloads_complete": false,
+  "all_paper_rows_exactly_reproduced": false,
+  "site_push_performed": false,
+  "site_deployment_verified": false,
+  "site_push_owner": "main",
+  "site_push_destination": "pages"
+}

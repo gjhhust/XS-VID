@@ -1,0 +1,33 @@
+{
+  "checked_date": "2026-10-06",
+  "pages": [
+    {
+      "page": "index.html",
+      "local_references_checked": 22,
+      "commands_cli_valid": true
+    },
+    {
+      "page": "DOWNLOAD.html",
+      "local_references_checked": 11,
+      "commands_cli_valid": true
+    },
+    {
+      "page": "_release/DOWNLOAD.public.html.in",
+      "local_references_checked": 11,
+      "commands_cli_valid": true
+    }
+  ],
+  "local_broken_links": [],
+  "draft_link_context": "source template matches activated root DOWNLOAD.html; alternate preview route is virtual only",
+  "publicGuideTemplateActivated": true,
+  "overall_release_accepted": false,
+  "upstream_downloader_anonymous_access_accepted": false,
+  "mot_source_metrics_equal_receipt": true,
+  "tbd_source_metrics_equal_receipt": true,
+  "hf_321_hash_receipt_checked": true,
+  "publication_receipt_fields_verified": true,
+  "root_guide_equals_clean_source_template": true,
+  "external_results": "publication_snapshot.json and hf_anonymous_probe.json supersede old mirror statuses; external_links.json remains historical for DOI/other URLs",
+  "public_visibility_and_basic_anonymous_access_verified": true,
+  "all_anonymous_full_dataset_cli_downloads_verified": false
+}

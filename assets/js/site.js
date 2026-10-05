@@ -19,9 +19,9 @@
     ['Unicorn', 'Unified', 25.62, 45.83, 5.1, 'ECCV', 2022], ['UNINEXT', 'Unified', 38.84, 54.30, 21.0, 'CVPR', 2023], ['YOLOFT-L', 'Unified', 59.63, 81.35, 17.1, '—', '—']
   ];
   const taskConfig = {
-    detection: { title: 'Detection', text: 'All methods are evaluated on the released XS-VID Detection protocol. AP columns report scale-specific results.', metric: 'AP', rows: detection, headers: ['Method', 'Family', 'AP', 'APes', 'APrs', 'APgs', 'APm', 'APl', 'Params', 'FLOPs', 'Latency'], numeric: [2, 3, 4, 5, 6, 7], callout: ['29.3 AP', 'YOLOFT-L'] },
-    mot: { title: 'Multi-object tracking', text: 'Multi-stage methods use the common YOLOFT detections. End-to-end and unified methods are reported as model-level entries.', metric: 'TAO mAP', rows: mot, headers: ['Tracker / model', 'Family', 'Paradigm', 'mAP', 'APs', 'APm', 'APs*', 'APm*', 'MOTA', 'IDF1', 'IDSw'], numeric: [3, 4, 5, 6, 7, 8, 9, 10], callout: ['32.1 mAP', 'BoT-SORT · track-by-detection'] },
-    sot: { title: 'Single-object tracking', text: 'Trackers are evaluated on the released target trajectories using success AUC and 20-pixel precision.', metric: 'Success AUC', rows: sot, headers: ['Tracker', 'Family', 'AUC', 'Precision', 'FPS', 'Venue', 'Year'], numeric: [2, 3, 4, 6], callout: ['66.40 AUC', 'LoRAT-g224'] }
+    detection: { title: 'Detection (paper)', text: 'The table retains paper-reported Detection results. Fresh checkpoint verification covers YOLOFT-L only, not all rows. YOLOFT-S remains unresolved: historical candidate AP 22.249% differs from paper 25.8% and is not release-ready. New results should use corrected canonical test annotations; AP columns report scale-specific results.', metric: 'AP', rows: detection, headers: ['Method', 'Family', 'AP', 'APes', 'APrs', 'APgs', 'APm', 'APl', 'Params', 'FLOPs', 'Latency'], numeric: [2, 3, 4, 5, 6, 7], callout: ['29.3 AP', 'YOLOFT-L'] },
+    mot: { title: 'Multi-object tracking (paper)', text: 'The table retains paper-reported results. Fresh unified YOLOFT MOT (2026-10-06) reproduces TAO mAP 31.5% at reported precision; APs / APm / APs* / APm* are 21.3 / 32.7 / 16.3 / 40.3%, versus paper 21.7 / 32.8 / 16.4 / 40.4%. This is not an all-metric exact match. Paper reproduction uses paper_track_id with track_id fallback; canonical identities are a separate protocol. Multi-stage/TBD validation is separate.', metric: 'TAO mAP', rows: mot, headers: ['Tracker / model', 'Family', 'Paradigm', 'mAP', 'APs', 'APm', 'APs*', 'APm*', 'MOTA', 'IDF1', 'IDSw'], numeric: [3, 4, 5, 6, 7, 8, 9, 10], callout: ['32.1 mAP', 'BoT-SORT · track-by-detection'] },
+    sot: { title: 'Single-object tracking (paper)', text: 'Paper-reported SOT results use success AUC (%) and precision at 20 pixels (%). YOLOFT-L: paper 59.63/81.35; verified checkpoint SHA-256 prefix c59639f868a5. SOT verified (2026-10-06): freshly downloaded corrected weights reproduce the paper on all 272 sequences. Verification covers the corrected YOLOFT-L checkpoint, not every paper-table row.', metric: 'Success AUC', rows: sot, headers: ['Tracker', 'Family', 'AUC (%)', 'Precision @ 20 px (%)', 'FPS', 'Venue', 'Year'], numeric: [2, 3, 4, 6], callout: ['66.40 AUC', 'LoRAT-g224'] }
   };
   const panel = document.getElementById('benchmark-content');
   let activeTask = 'detection';
@@ -280,8 +280,13 @@
   document.getElementById('next-sample').addEventListener('click', () => { setAutoplay(false); selectFrame(frameIndex + 1); });
   window.addEventListener('resize', draw);
   document.getElementById('copy-command').addEventListener('click', async event => {
-    await navigator.clipboard.writeText(document.getElementById('quick-command').textContent);
-    event.currentTarget.textContent = 'Copied';
-    setTimeout(() => { event.currentTarget.textContent = 'Copy'; }, 1200);
+    const button = event.currentTarget;
+    try {
+      await navigator.clipboard.writeText(document.getElementById('quick-command').textContent);
+      button.textContent = 'Copied';
+    } catch (_) {
+      button.textContent = 'Copy failed';
+    }
+    setTimeout(() => { button.textContent = 'Copy'; }, 1200);
   });
 })();

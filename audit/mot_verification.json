@@ -1,0 +1,57 @@
+{
+  "verified_date": "2026-10-06",
+  "verification_scope": "Fresh unified MOT TAO scoring; overall mAP only matches at reported precision",
+  "gate_status": "OVERALL_REPRODUCED_SUBSET_DELTA",
+  "job_id": "20261006-01595209-pil7bk",
+  "job_queue_snapshot_state": "done",
+  "job_exit_code": 0,
+  "source_metrics": "mot_inference/metrics.json in the parent release reaudit workspace",
+  "paper_source": "arxiv/source/tables/supplement/mot_results_full.tex, YOLOFT Unified row",
+  "track_field": "paper_track_id",
+  "track_field_overrides": 1225,
+  "track_field_fallbacks": 369264,
+  "metrics_percent": {
+    "mAP": 31.5,
+    "AP_s": 21.3,
+    "AP_m": 32.7,
+    "AP_s_star": 16.3,
+    "AP_m_star": 40.3
+  },
+  "paper_metrics_percent": {
+    "mAP": 31.5,
+    "AP_s": 21.7,
+    "AP_m": 32.8,
+    "AP_s_star": 16.4,
+    "AP_m_star": 40.4
+  },
+  "fresh_minus_paper_percentage_points": {
+    "mAP": 0.0,
+    "AP_s": -0.4,
+    "AP_m": -0.1,
+    "AP_s_star": -0.1,
+    "AP_m_star": -0.1
+  },
+  "overall_map_reproduced_at_reported_precision": true,
+  "all_metrics_exact_match": false,
+  "motchallenge_metrics_source_read": true,
+  "motchallenge_fresh_vs_paper_exact_match": false,
+  "motchallenge": {
+    "source_metrics": "mot_inference/paper_motchallenge.json in the parent release reaudit workspace",
+    "profile": "unified-raw",
+    "fresh_metrics_percent": {"MOTA": 30.37604336976164, "IDF1": 54.943512425906796},
+    "paper_reported_percent": {"MOTA": 30.7, "IDF1": 55.2},
+    "historical_replay_percent_user_reported": {"MOTA": 30.6686, "IDF1": 55.1525},
+    "fresh_minus_historical_approx_percentage_points": {"MOTA": -0.29, "IDF1": -0.21},
+    "fresh_minus_paper_reported_approx_percentage_points": {"MOTA": -0.32, "IDF1": -0.26},
+    "videos": 64,
+    "pred_missing": 1,
+    "missing_sequences": ["video-238537_source_1"],
+    "gt_duplicate_frame_instance_rows_preserved": true,
+    "historical_replay_is_fresh_inference": false,
+    "prediction_sha256": "db708b08083e20e1536dc5b5dab5a4907d306a7b5d19c329246e117a8e56dce8",
+    "gt_content_set_sha256": "4067c583bbba1cb1c32cfdd2d56decc4460ae0da897c1d82b15c626e03c45d57"
+  },
+  "tbd_accepted_here": false,
+  "overall_release_accepted": false,
+  "anonymous_access_accepted_here": false
+}

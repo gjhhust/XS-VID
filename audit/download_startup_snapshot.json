@@ -1,0 +1,28 @@
+{
+  "snapshot_date": "2026-10-06",
+  "hf": {
+    "source_receipt": "hf_body_verification.json in parent workspace",
+    "revision": "49606d139c27107b421e59ee80d4061259ad60d6",
+    "verified_files": 321,
+    "verified_bytes": 33396136029,
+    "all_match": true,
+    "file_entry_count_checked": 321,
+    "mismatching_entries": 0,
+    "access_scope": "Historical fresh authenticated download before publication; current public visibility is recorded in publication_snapshot.json",
+    "job_done_exit_zero_user_reported": true,
+    "anonymous_access_verified": false
+  },
+  "fresh_gpu_startup": {
+    "source_receipts": "training_smoke_fresh/{smoke_train.json,vid/vid_startup/startup_smoke.json,mot/startup_smoke.json,sot/startup_smoke.json} in parent workspace",
+    "gpu_executed": true,
+    "task_optimizer_updates": {"vid": 4, "mot": 2, "sot": 2},
+    "vid_finite_loss_gradients_checkpoint": true,
+    "mot_cpu_reload_verified": true,
+    "sot_cpu_reload_verified": true,
+    "all_task_startup_save_reload_done_exit_zero_user_reported": true,
+    "verification_scope": "Bounded startup/save/reload smoke only; not full training or benchmark reproduction"
+  },
+  "anonymous_all_gate_receipt_received": false,
+  "current_publication_snapshot": "publication_snapshot.json",
+  "overall_release_accepted": false
+}
