@@ -22,7 +22,20 @@
     "all_task_startup_save_reload_done_exit_zero_user_reported": true,
     "verification_scope": "Bounded startup/save/reload smoke only; not full training or benchmark reproduction"
   },
-  "anonymous_all_gate_receipt_received": false,
+  "anonymous_all_gate_receipt_received": true,
+  "anonymous_dataset_acceptance": {
+    "hf_job": "20261006-02432285-fb67ib",
+    "hf_independent_audit": "20261006-04042054-xxu8c3",
+    "ms_job": "20261006-02451374-rlqrzw",
+    "ms_independent_audit": "20261006-03414194-in54ln",
+    "all_four_jobs_done_exit_zero": true,
+    "per_mirror_archive_sha_matches": 16,
+    "per_mirror_images": 222924,
+    "per_mirror_annotated_label_files": 173717,
+    "background_label_policy": "Frames without annotations intentionally have no label file",
+    "splits_and_legacy_yaml_verified": true
+  },
   "current_publication_snapshot": "publication_snapshot.json",
-  "overall_release_accepted": false
+  "dataset_download_and_startup_accepted": true,
+  "all_paper_rows_exactly_reproduced": false
 }

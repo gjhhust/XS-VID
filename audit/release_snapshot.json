@@ -9,7 +9,7 @@
   "tbd_l": "Fresh TAO 31.9 vs paper 32.1 and MOTChallenge deltas disclosed; CPU recovery done exit 0. See tbd_verification.json",
   "hf_hash_and_fresh_gpu_startup": "321/321 SHA match and bounded startup receipts read; not anonymous access or full retraining. See download_startup_snapshot.json",
   "detection_s": {
-    "evidence_source": "User report; historical candidate result, not a fresh accepted release receipt",
+    "evidence_source": "Historical candidate score-only audit s_candidate_score_archival.json; not a matching paper checkpoint",
     "historical_candidate_ap_percent": 22.249,
     "paper_ap_percent": 25.8,
     "release_ready": false,
@@ -17,18 +17,18 @@
   },
   "coordination_user_reported": {
     "tbd": "66/66 complete; terminal closed after valid score; CPU recovery done exit 0, no GPU repeat",
-    "modelscope": "Published visibility 5; anonymous 321 SHA metadata, four document bodies and six range samples verified by receipt; not full all-file redownload",
-    "huggingface": "Dataset/model public by receipt; anonymous model CLI done exit 0; full anonymous dataset CLI still running at snapshot",
-    "portable_legacy_protocol": "Ready, agent integrating; public integration not accepted here",
+    "modelscope": "Public visibility 5; full anonymous dataset CLI and independent archive/image/label/split audit done exit 0",
+    "huggingface": "Dataset/model public; full anonymous dataset/model CLI and independent dataset audit plus strict checkpoint load done exit 0",
+    "portable_legacy_protocol": "Public code 297a612 includes protocol tools; legacy scorer tests 35 PASS",
     "public_code_review": "Native public-code checks 61 PASS; four fixes done, user-reported",
     "fresh_data_training_hf_sha_gates": "All PASS, user-reported; not anonymous public-gate acceptance"
   },
-  "anonymous_all_gate_receipt_received": false,
+  "anonymous_all_gate_receipt_received": true,
   "overall_release_accepted": false,
   "publication_receipts_received": true,
   "local_public_guide_activation_authorized": true,
   "public_guide_template_activated": true,
   "publication_snapshot": "publication_snapshot.json",
-  "push_authorized": false,
+  "push_authorized": true,
   "push_destination_after_explicit_acceptance": "pages"
 }
