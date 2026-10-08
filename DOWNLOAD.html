@@ -3,116 +3,71 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>XS-VID v2 | Download and Reproduce</title>
+  <title>XS-VID v2 | Download and Evaluate</title>
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/overrides.css?v=download-cli-20261006">
+  <link rel="stylesheet" href="assets/css/overrides.css?v=release-v2">
 </head>
 <body>
 <header class="topbar"><a class="wordmark" href="index.html">XS-VID</a><a href="index.html#release">Benchmark homepage</a></header>
 <main class="section portable-guide">
-  <h1>XS-VID v2 Download and Reproduce</h1>
+  <h1>XS-VID v2 Download and Evaluate</h1>
   <h2>Download the dataset</h2>
-  <p>Use Python and Git. The YOLOFT downloader uses the Python standard library: no hub SDK installation is needed. It downloads the release, verifies media-archive SHA-256 checksums, extracts images and generates portable labels, split lists and the Detection YAML bridge.</p>
-  <p>Allow about 34 GB for downloads, plus additional space for extracted images and labels. Replace <code>./downloads</code> with your destination directory.</p>
+  <p>The YOLOFT downloader uses the Python standard library; no hub SDK installation is needed. It verifies archive SHA-256 checksums, extracts images and prepares labels, split lists and the Detection YAML bridge.</p>
+  <p>Allow about 34 GB for downloads, plus space for extracted images and labels. Replace <code>./downloads</code> with your destination directory.</p>
   <div class="command-block"><pre><code>git clone https://github.com/gjhhust/YOLOFT.git
 cd YOLOFT
 python tools/xsvid/download_release.py --hub ms --destination ./downloads</code></pre></div>
-  <p>ModelScope is the domestic dataset mirror. Alternatively, use Hugging Face:</p>
+  <p>Alternatively, use Hugging Face:</p>
   <div class="command-block"><pre><code>python tools/xsvid/download_release.py --hub hf --destination ./downloads</code></pre></div>
   <p>Dataset mirrors: <a href="https://modelscope.cn/datasets/lanlanlanrr/XS-VID-v2">ModelScope</a> / <a href="https://huggingface.co/datasets/lanlanlan23/XS-VID-v2">Hugging Face</a>.</p>
-  <p>Both dataset mirrors and the HF YOLOFT-L model package are public. Full anonymous dataset downloads and preparation passed on both mirrors: 16/16 archive hashes, 222924 images, 173717 annotated-frame label files, split lists and portable YAML were independently verified. Background frames intentionally have no label file.</p>
-  <h2>Download the models</h2>
-  <p><a href="https://huggingface.co/lanlanlan23/YOLOFT-XSVID-v2/blob/a6ef7c08c4fc9066d0afa622b32732f3aa16a896/audit/reproduction_index.json">Reproduction evidence index</a> / <a href="https://huggingface.co/lanlanlan23/YOLOFT-XSVID-v2/resolve/a6ef7c08c4fc9066d0afa622b32732f3aa16a896/audit/reproduction_20261006.zip?download=true">Evidence ZIP</a>: actual inference metrics, startup/save/reload receipts, source and checkpoint hashes, full anonymous dataset acceptance and bounded job logs. Anonymous VID/MOT/SOT checkpoint strict loading passed with zero missing or unexpected keys.</p>
-  <p>The HF model package supplies task-specific YOLOFT-L Detection, MOT and SOT checkpoints, portable TransT initialization and OSNet weights. Model download verifies their pinned hashes; it does not verify every paper benchmark row.</p>
-  <div class="command-block"><pre><code>python tools/xsvid/download_release.py --hub hf --component model --destination ./downloads</code></pre></div>
-  <p>To fetch both the dataset and models from HF in one command, use <code>--hub hf --component all</code> with the same destination. <a href="https://huggingface.co/lanlanlan23/YOLOFT-XSVID-v2">Model package</a>.</p>
-  <h2>Prepared layout</h2>
-  <div class="command-block"><pre><code>downloads/
-  XS-VID-v2/
-    annotations/
-    archives/
-    images/
-    labels/
-    splits/
-    sot/
-    tools/
-    manifests/
-    legacy_yoloft.yaml
-  YOLOFT-XSVID-v2/
-    checkpoints/
-    configs/</code></pre></div>
-  <p>All 222,924 benchmark images are packaged in 16 media archives. With the default dataset command, hash checking, extraction and label preparation are automatic; do not repeat manual extraction for this workflow.</p>
-  <h2>Run and evaluate</h2>
-  <p>Follow the <a href="https://github.com/gjhhust/YOLOFT">YOLOFT README</a> for runtime dependencies, full VID/MOT/SOT inference commands and the bounded training-startup command. Download preparation does not install CUDA operators or run GPU inference.</p>
+  <h2 id="model-checkpoints">Model checkpoints</h2>
+  <p><strong>YOLOFT</strong> supports Detection; <strong>Unified YOLOFT</strong> supports MOT and SOT. See the <a href="https://github.com/gjhhust/YOLOFT">YOLOFT documentation</a> for checkpoints and compatible code versions.</p>
+  <h2>Prepared dataset layout</h2>
+  <div class="command-block"><pre><code>downloads/XS-VID-v2/
+  annotations/
+  archives/
+  images/
+  labels/
+  splits/
+  sot/
+  tools/
+  manifests/
+  legacy_yoloft.yaml</code></pre></div>
+  <p>The dataset contains 222,924 images in 16 media archives. Image extraction and label preparation are automatic with the dataset command. Background frames intentionally have no label file.</p>
+  <h2>Evaluation protocols</h2>
+  <p>See the <a href="index.html#benchmark">Results</a> for track comparisons.</p>
   <ul>
-    <li>Paper reproduction: the downloader defaults to <code>--detection-protocol paper</code>, using <code>annotations/protocols/paper_detection_test.json</code>.</li>
-    <li>New Detection results: add <code>--detection-protocol canonical</code> to use corrected <code>annotations/test.json</code>.</li>
-    <li>New MOT results use canonical <code>track_id</code>; paper reproduction uses <code>paper_track_id</code> with fallback to <code>track_id</code>.</li>
-    <li>SOT uses the 272 sequences in <code>sot/test.txt</code> and their official target trajectories.</li>
+    <li>Detection: <code>--detection-protocol paper</code> selects <code>annotations/protocols/paper_detection_test.json</code>; <code>canonical</code> selects <code>annotations/test.json</code>.</li>
+    <li>MOT: paper protocol uses <code>paper_track_id</code> (fallback: <code>track_id</code>); canonical uses <code>track_id</code>.</li>
+    <li>SOT: official 272-sequence test list and target trajectories.</li>
   </ul>
-  <h2>Verified results</h2>
-  <div class="table-wrap reproduction-wrap" tabindex="0" role="region" aria-label="Selected YOLOFT-L fresh reproduction results">
-    <table class="reproduction-table">
-      <caption>Selected YOLOFT-L results: paper vs fresh inference. Scores are %, deltas are fresh minus published paper values in percentage points. Display rounding is not bit-exact equality.</caption>
-      <thead><tr><th scope="col">Checkpoint / method</th><th scope="col">Metric</th><th scope="col">Paper</th><th scope="col">Fresh</th><th scope="col">Delta (pp)</th><th scope="col">Interpretation</th></tr></thead>
-      <tbody>
-        <tr><th scope="row">L Detection</th><td>AP</td><td>29.3</td><td>29.31236</td><td>+0.01236</td><td>Paper reference verified; rounded match</td></tr>
-        <tr><th scope="row">L SOT</th><td>AUC</td><td>59.63</td><td>59.62858</td><td>-0.00142</td><td>Paper reference verified; rounded match</td></tr>
-        <tr><th scope="row">L SOT</th><td>Precision @ 20 px</td><td>81.35</td><td>81.34921</td><td>-0.00079</td><td>Paper reference verified; rounded match</td></tr>
-        <tr><th scope="row">L unified MOT</th><td>TAO mAP</td><td>31.5</td><td>31.5</td><td>0.0</td><td>Matches at reported precision</td></tr>
-        <tr><th scope="row">L unified MOT</th><td>APs / APm / APs* / APm*</td><td>21.7 / 32.8 / 16.4 / 40.4</td><td>21.3 / 32.7 / 16.3 / 40.3</td><td>-0.4 / -0.1 / -0.1 / -0.1</td><td>Subset differences</td></tr>
-        <tr><th scope="row">L unified MOT</th><td>MOTA</td><td>30.7</td><td>30.37604</td><td>-0.32396</td><td>Fresh inference differs</td></tr>
-        <tr><th scope="row">L unified MOT</th><td>IDF1</td><td>55.2</td><td>54.94351</td><td>-0.25649</td><td>Fresh inference differs</td></tr>
-        <tr><th scope="row">L + BoT-SORT</th><td>TAO mAP</td><td>32.1</td><td>31.9</td><td>-0.2</td><td>Fresh score differs</td></tr>
-        <tr><th scope="row">L + BoT-SORT</th><td>APs / APm / APs* / APm*</td><td>22.4 / 33.4 / 18.1 / 40.8</td><td>22.1 / 33.2 / 16.9 / 40.8</td><td>-0.3 / -0.2 / -1.2 / 0.0</td><td>Subset differences</td></tr>
-        <tr><th scope="row">L + BoT-SORT</th><td>MOTA</td><td>37.1</td><td>36.94204</td><td>-0.15796</td><td>Fresh inference differs</td></tr>
-        <tr><th scope="row">L + BoT-SORT</th><td>IDF1</td><td>54.7</td><td>54.57008</td><td>-0.12992</td><td>Fresh inference differs</td></tr>
-      </tbody>
-    </table>
-  </div>
-  <p><strong>Track-by-Detection (YOLOFT-L + BoT-SORT): fresh score differs.</strong> All 66/66 videos completed per the run report; TAO mAP 31.9% versus paper 32.1%. APs / APm / APs* / APm* are 22.1 / 33.2 / 16.9 / 40.8%, versus paper 22.4 / 33.4 / 18.1 / 40.8% (deltas -0.3 / -0.2 / -1.2 / 0.0 percentage points). APm* matching alone does not establish an exact row match. <a href="audit/tbd_verification.json">TBD evidence</a>.</p>
-  <p>Fresh-download GPU startup/save/reload checks are bounded smoke tests, not full retraining or evidence that all paper rows match. <a href="audit/download_startup_snapshot.json">Download and startup evidence</a>.</p>
-  <p><strong>TBD MOTChallenge:</strong> fresh MOTA 36.94204% / IDF1 54.57008%, versus paper 37.1% / 54.7%. Historical archived replay was 37.0705% / 54.6878% (user-reported), not fresh inference; fresh minus replay is about -0.13 / -0.12 percentage points. The <code>botsort-tau03</code> profile applies a score threshold of 0.3, unlike unified MOT's <code>unified-raw</code> profile. Its 64-sequence GT scoring record includes two missing prediction sequences and preserved duplicate GT rows; 66-video inference and 64-sequence historical scoring coverage are distinct.</p>
-  <p><strong>Checkpoint scope: YOLOFT-L only.</strong> These checks do not validate all paper benchmark rows. The YOLOFT-S Detection row remains unresolved: the historical S candidate scored AP 22.249%, not the paper's 25.8%, and is not release-ready.</p>
-<p><strong>Unified MOT: overall mAP reproduced (2026-10-06).</strong> Fresh TAO mAP is 31.5%, matching the paper at reported precision. APs / APm / APs* / APm* are 21.3 / 32.7 / 16.3 / 40.3%, versus paper 21.7 / 32.8 / 16.4 / 40.4% (fresh minus paper: -0.4 / -0.1 / -0.1 / -0.1 percentage points). This is not an all-metric exact match, nor verification of the multi-stage/TBD results or exact reproduction of the MOTChallenge paper metrics. <a href="audit/mot_verification.json">MOT evidence</a>.</p>
-  <p><strong>Fresh unified MOTChallenge inference:</strong> MOTA 30.37604% / IDF1 54.94351%, versus paper 30.7% / 55.2%. Historical archived replay was 30.6686% / 55.1525% (user-reported), which rounds to the paper values but is not fresh checkpoint inference. Fresh minus historical replay is about -0.29 / -0.21 percentage points; fresh minus the rounded paper values is about -0.32 / -0.26 points. The scoring record includes 64 GT sequences, one with missing predictions; it preserves historical duplicate GT rows. These results are not an exact paper match.</p>
-  <p><strong>Detection (paper protocol): PASS (2026-10-06).</strong> YOLOFT-L AP <code>0.29312364250948897</code>, matching the paper reference (29.3% rounded). <a href="audit/vid_verification.json">Detection evidence</a>.</p>
-  <p><strong>SOT verified (2026-10-06).</strong> Full inference on 272 sequences / 107788 frames matches success AUC <code>0.5962858499675809</code> and precision at 20 pixels <code>0.8134921266242936</code> (59.63% / 81.35% rounded). <a href="audit/sot_verification.json">SOT evidence</a>.</p>
-  <p>SOT release checkpoint: <code>checkpoints/yoloft-l-xsvid-v2-sot.pt</code>. SHA-256: <code>c59639f868a5fdfa5474f072d657bafb072430c7386b12901e3bc1ac7a42188a</code>.</p>
+  <p>Task-specific inference, evaluation and training commands are in the <a href="https://github.com/gjhhust/YOLOFT">YOLOFT documentation</a>.</p>
   <details class="guide-details">
-    <summary>Public repository verification snapshot (2026-10-06)</summary>
-    <p>HF dataset revision <code>d6cbae5448f87b205794479ad68f5e5f38fa89e9</code>; HF model revision <code>9616de3539dd87fd76e201f33ad3658b34ca0dfa</code>; YOLOFT code commit <code>297a612f2fd65f66df15a069e7b12125437029bd</code>. Dataset and model revisions are independent.</p>
-    <p>Both mirrors completed full anonymous dataset CLI preparation, followed by independent archive SHA and image/label/split/YAML checks. ModelScope additionally passed anonymous 321-entry canonical SHA metadata comparison and Range samples. The full HF anonymous model CLI verified pinned runtime weights, GT ZIP and protocol metadata; actual downloaded weights strictly load for all three tasks. Preparation and strict-loading success are distinct from the fresh GPU benchmark results recorded above.</p>
-    <p><a href="audit/publication_snapshot.json">Publication and anonymous-check evidence</a>.</p>
+    <summary>Versions and existing downloads</summary>
+    <p>Record the code commit, model release version and dataset revision. HF defaults to <code>main</code> and ModelScope to <code>master</code>; pass <code>--revision YOUR_RECORDED_REVISION</code> to pin the dataset revision.</p>
+    <p>Rerunning verifies and reuses downloaded files. Failed transfers are retried. Use <code>--offline</code> to verify and prepare an already complete download.</p>
   </details>
   <details class="guide-details">
-    <summary>Download revisions and existing files</summary>
-    <p>Record the code commit and mirror revision for repeatable experiments. HF defaults to <code>main</code> and ModelScope to <code>master</code>; pass <code>--revision YOUR_RECORDED_REVISION</code> to pin a revision. Dataset and model repositories have independent revisions.</p>
-    <p>Rerunning the command verifies and reuses files with known hashes, then repeats preparation. Failed individual transfers are retried, not byte-range resumed. Use <code>--offline</code> to verify and prepare an already complete download. The success marker <code>RELEASE_PREPARED</code> means integrity/preparation only, not GPU reproduction.</p>
-  </details>
-  <details class="guide-details">
-    <summary>SDK download alternatives and manual validation</summary>
-    <p>These optional SDK commands download repository files only. Unlike the main CLI workflow, extraction and label preparation must be run separately.</p>
+    <summary>SDK alternatives and manual validation</summary>
+    <p>These optional SDK commands download repository files only. Extraction and label preparation must be run separately.</p>
     <div class="command-block"><pre><code>python -m pip install -U huggingface_hub
 python -c 'from huggingface_hub import snapshot_download; snapshot_download(repo_id="lanlanlan23/XS-VID-v2", repo_type="dataset", local_dir="./downloads/XS-VID-v2")'</code></pre></div>
     <div class="command-block"><pre><code>python -m pip install -U modelscope
 python -c 'from modelscope.hub.snapshot_download import dataset_snapshot_download; dataset_snapshot_download(dataset_id="lanlanlanrr/XS-VID-v2", local_dir="./downloads/XS-VID-v2")'</code></pre></div>
-    <p>For SDK downloads, verify <code>archives/manifest.json</code> and its archive hashes before extraction, then prepare the portable layout from the YOLOFT code root:</p>
+    <p>Verify archive hashes against <code>archives/manifest.json</code> before extraction. From the YOLOFT code root:</p>
     <div class="command-block"><pre><code>for archive in ./downloads/XS-VID-v2/archives/XSVID_v2_images_*_of_16.tar; do
   tar -xf "$archive" -C ./downloads/XS-VID-v2 || exit 1
 done
 python tools/xsvid/prepare_legacy_layout.py --data-root ./downloads/XS-VID-v2 --detection-protocol paper --regenerate-labels</code></pre></div>
-    <p>Optional annotation and referenced-media checks run from the downloaded dataset root. Keep the complete <code>tools/</code> directory, including the validators' <code>build_unified_annotations.py</code> dependency:</p>
+    <p>Optional validation runs from the downloaded dataset root. Keep the complete <code>tools/</code> directory and its dependencies:</p>
     <div class="command-block"><pre><code>cd ./downloads/XS-VID-v2
 python tools/validate_release_annotations.py annotations/train.json --output xsvid_train_validation.json
 python tools/validate_release_annotations.py annotations/test.json --output xsvid_test_validation.json
 python tools/validate_release_media.py --root . --output xsvid_media_validation.json</code></pre></div>
-    <p>These validators check annotations and referenced file presence; the media validator does not hash image pixels. SDK references: <a href="https://huggingface.co/docs/huggingface_hub/guides/download">Hugging Face</a> and <a href="https://github.com/modelscope/modelscope/blob/master/modelscope/hub/snapshot_download.py">ModelScope</a>.</p>
+    <p>These validators check annotations and referenced file presence; the media validator does not hash image pixels.</p>
   </details>
-  <details class="guide-details">
-    <summary>Historical SOT checkpoint correction</summary>
-    <p>The paper checkpoint originated as <code>sot_tt_f918jt_push.pt</code>, with the correct SHA shown above. An earlier release mistakenly packaged <code>sot_tt_f918jt.pt</code> (SHA-256 <code>dc2fc4263258f4da9a42e49e3d906326ae3835b223b6c5b90a16e32cfaf9169a</code>), which scored 57.09% / 79.35%. The corrected checkpoint is verified by fresh GPU inference; do not substitute the historical weights. <a href="audit/sot_verification.json">Verification record</a>.</p>
-  </details>
+  <h2>Licenses</h2>
+  <p>Consult the dataset license, YOLOFT code notices and applicable pretrained-weight licenses.</p>
 </main>
 </body>
 </html>

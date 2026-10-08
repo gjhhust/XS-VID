@@ -1,9 +1,0 @@
-{
-  "checked_date": "2026-10-06",
-  "authentication": "None; standard-library urllib, no Authorization/cookie headers or token reads",
-  "scope": "Repo metadata and two pinned README bodies only, not full anonymous download",
-  "results": [
-    {"repo": "lanlanlan23/XS-VID-v2", "repo_type": "dataset", "metadata_http_status": 200, "private": false, "current_revision": "d6cbae5448f87b205794479ad68f5e5f38fa89e9", "body_http_status": 200, "body_bytes": 7047, "body_sha256": "47e8d1f57937002ce3abc0df4101b1d6de967bb57447bc3afbf407edc83cbb48", "body_url": "https://huggingface.co/datasets/lanlanlan23/XS-VID-v2/resolve/d6cbae5448f87b205794479ad68f5e5f38fa89e9/README.md"},
-    {"repo": "lanlanlan23/YOLOFT-XSVID-v2", "repo_type": "model", "metadata_http_status": 200, "private": false, "current_revision": "9616de3539dd87fd76e201f33ad3658b34ca0dfa", "body_http_status": 200, "body_bytes": 4668, "body_sha256": "0818f3d3cd0bf666481f8d47832b94fef8be83f9425dcb54083fabdf5d7c530f", "body_url": "https://huggingface.co/lanlanlan23/YOLOFT-XSVID-v2/resolve/9616de3539dd87fd76e201f33ad3658b34ca0dfa/README.md"}
-  ]
-}
