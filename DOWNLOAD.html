@@ -21,7 +21,8 @@ python tools/xsvid/download_release.py --hub ms --destination ./downloads</code>
   <div class="command-block"><pre><code>python tools/xsvid/download_release.py --hub hf --destination ./downloads</code></pre></div>
   <p>Dataset mirrors: <a href="https://modelscope.cn/datasets/lanlanlanrr/XS-VID-v2">ModelScope</a> / <a href="https://huggingface.co/datasets/lanlanlan23/XS-VID-v2">Hugging Face</a>.</p>
   <h2 id="model-checkpoints">Model checkpoints</h2>
-  <p><strong>YOLOFT</strong> supports Detection; <strong>Unified YOLOFT</strong> supports MOT and SOT. See the <a href="https://github.com/gjhhust/YOLOFT">YOLOFT documentation</a> for checkpoints and compatible code versions.</p>
+  <p><a href="https://huggingface.co/lanlanlan23/YOLOFT-XSVID-v2-weights">YOLOFT / Unified YOLOFT weights</a>: <code>vid.pt</code>, <code>unified_mot.pt</code>, <code>unified_sot.pt</code>.</p>
+  <div class="command-block"><pre><code>python tools/xsvid/download_release.py --hub hf --component model --model-repo lanlanlan23/YOLOFT-XSVID-v2-weights --destination ./downloads</code></pre></div>
   <h2>Prepared dataset layout</h2>
   <div class="command-block"><pre><code>downloads/XS-VID-v2/
   annotations/
