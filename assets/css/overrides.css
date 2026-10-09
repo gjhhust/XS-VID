@@ -1,4 +1,5 @@
 /* Benchmark explorer and sequence browser. */
+.resource-links{display:flex;align-items:center;gap:16px;flex-shrink:0}#release{scroll-margin-top:72px}
 .sot-provenance code{overflow-wrap:anywhere}
 .guide-details{margin:24px 0;border-top:1px solid var(--line);padding-top:14px}.guide-details summary{cursor:pointer;font-weight:700;font-size:14px}.guide-details summary:focus-visible{outline:2px solid var(--green);outline-offset:4px}.release-status{padding:12px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
 .sot-provenance .provenance-table{table-layout:fixed;min-width:0;width:100%}.sot-provenance .provenance-table th,.sot-provenance .provenance-table td{white-space:normal;overflow-wrap:anywhere}.sot-provenance .provenance-table th:first-child{width:50%}
