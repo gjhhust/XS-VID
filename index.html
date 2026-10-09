@@ -9,10 +9,10 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="assets/css/site.css">
-  <link rel="stylesheet" href="assets/css/overrides.css?v=top-resource-links">
+  <link rel="stylesheet" href="assets/css/overrides.css?v=minimal-hero">
 </head>
 <body>
-<header class="topbar">
+<header class="topbar" aria-hidden="true" inert>
   <a class="wordmark" href="#top">XS<span>-</span>VID</a>
   <nav aria-label="Primary navigation"><a href="#data">Data</a><a href="#benchmark">Benchmarks</a><a href="#yoloft">YOLOFT</a><a href="#explorer">Explore</a><a href="#release">Release</a></nav>
   <div class="resource-links" role="navigation" aria-label="Project resources"><a class="nav-github" href="https://doi.org/10.1109/TPAMI.2026.3741044">Paper</a><a class="nav-github" href="#release">Dataset</a><a class="nav-github" href="https://github.com/gjhhust/YOLOFT">Code</a></div>
@@ -20,9 +20,8 @@
 <main id="top">
   <section class="hero">
     <div class="hero-copy">
-      <p class="eyebrow">A benchmark for video understanding at the smallest scales</p>
-      <h1>Small objects.<br><em>Full video context.</em></h1>
-      <p class="lede">XS-VID is a densely annotated benchmark for video object detection, multi-object tracking, and single-object tracking in scenes where target scale is the central difficulty.</p>
+      <h1>XS-VID</h1>
+      <div class="hero-resource-links" role="navigation" aria-label="Paper, dataset and code"><a href="https://doi.org/10.1109/TPAMI.2026.3741044"><img src="assets/icons/file-text.svg" alt="" width="20" height="20">Paper</a><a href="#release"><span class="dataset-icons"><img src="assets/icons/huggingface.svg" alt="" width="20" height="20"><img src="assets/icons/modelscope.png" alt="" width="20" height="20"></span>Dataset</a><a href="https://github.com/gjhhust/YOLOFT"><img src="assets/icons/github.svg" alt="" width="20" height="20">Code</a></div>
       <div class="hero-actions"><a class="button button-primary" href="#release">Get XS-VID v2 ↓</a><a class="button button-secondary" href="#benchmark">Browse benchmarks →</a></div>
     </div>
     <div class="hero-visual"><img src="assets/explorer/sample-1.jpg" alt="Aerial road scene from XS-VID"><i class="box one"></i><i class="box two"></i><i class="box three"></i><p class="frame-caption"><b></b>Annotated video frame · 1024 × 1024</p></div>
@@ -69,6 +68,6 @@ python tools/xsvid/download_release.py --hub ms --destination ./downloads</code>
 }</pre><a class="text-link" href="https://doi.org/10.1109/TPAMI.2026.3741044">Read the paper ↗</a></div></div><p class="ack-note">Acknowledgements: the release builds on and includes integrations adapted from <a href="https://github.com/ultralytics/ultralytics">Ultralytics</a>, <a href="https://github.com/OpenGVLab/InternImage">DCNv3 / InternImage</a>, <a href="https://github.com/NirAharon/BoT-SORT">BoT-SORT</a>, <a href="https://github.com/SwinTransformer/TransT">TransT</a>, and their respective dependencies. Please consult the included licenses before redistribution or commercial use.</p></section>
 </main>
 <footer><span>XS-VID · Small Object Detection and Tracking in Videos</span><span><a href="https://doi.org/10.1109/TPAMI.2026.3741044">Paper ↗</a> · <a href="https://github.com/gjhhust/XS-VID">Dataset ↗</a> · <a href="https://github.com/gjhhust/YOLOFT">Code ↗</a></span></footer>
-<script src="assets/js/site.js?v=restore-95a17c5"></script>
+<script src="assets/js/site.js?v=minimal-hero"></script>
 </body>
 </html>
